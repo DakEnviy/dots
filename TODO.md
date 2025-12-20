@@ -3,8 +3,18 @@
 - [x] Implement app detection and base apps config
 - [x] Add ranger
 - [x] Add fish
-- [ ] Add all simple apps
+- [ ] Add alias for chezmoi
+- [ ] Add vim
+- [ ] Add tmux
+- [ ] Add starship
+- [ ] Add macos-python:fish
+- [ ] Add fish:nvm
+- [ ] Add all fish integrations
+- [ ] Add git
+- [ ] Fix fish command highlighting
 - [ ] Add and configure fifc
+- [ ] Add ssh-agent
+- [ ] Add jumoreski
 - [ ] Add pnpm
 
 **Apps**
