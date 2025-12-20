@@ -1,0 +1,10 @@
+{{ if .apps.ranger.installed -}}
+default_linemode devicons
+
+{{ if .apps.kitty.installed -}}
+set preview_images true
+set preview_images_method kitty
+
+{{ end -}}
+{{ end -}}
+

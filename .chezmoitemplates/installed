@@ -1,9 +1,0 @@
-{{- $homeDir := env "$HOME" -}}
-{{- $homePath := list
-    (joinPath $homeDir ".local/bin")
-    (joinPath $homeDir ".cargo/bin")
-    (joinPath $homeDir ".go/bin")
--}}
-{{- $path := concat (splitList ":" (env "PATH")) $homePath -}}
-{{- if findOneExecutable . $path -}}true{{- else -}}false{{- end -}}
-

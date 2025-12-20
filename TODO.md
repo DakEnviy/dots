@@ -1,7 +1,7 @@
 **Tasks**
 
 - [x] Implement app detection and base apps config
-- [ ] Add ranger
+- [x] Add ranger
 - [ ] Add fish
 - [ ] Add all simple apps
 
@@ -14,7 +14,7 @@
 - [ ] vim:fish
 - [ ] tmux
 - [ ] tmux:fish
-- [ ] ranger
+- [x] ranger
 - [ ] ranger:fish
 - [ ] brew:fish
 - [ ] macos-python:fish
