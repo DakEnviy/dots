@@ -1,5 +1,6 @@
 {{- $apps := list
       "bat"
+      "chezmoi"
       "delta"
       "eza"
       "fd"
@@ -27,4 +28,10 @@ data:
     {{- toYaml $installed | trim | nindent 4 }}
   enabled:
     fishFzf: {{ all $installed.fish $installed.fzf $installed.fd $installed.bat }}
+
+{{ if $installed.delta -}}
+diff:
+  pager: delta
+
+{{ end -}}
 

@@ -3,7 +3,7 @@
 - [x] Implement app detection and base apps config
 - [x] Add ranger
 - [x] Add fish
-- [ ] Add alias for chezmoi
+- [x] Add alias for chezmoi
 - [ ] Add vim
 - [ ] Add tmux
 - [ ] Add starship
