@@ -1,0 +1,11 @@
+{{ if .installed.fish -}}
+#!/usr/bin/env bash
+
+# hash: {{ includeTemplate "dot_config/private_fish/fish_plugins.tmpl" . | sha256sum }}
+
+set -euo pipefail
+
+fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher update'
+
+{{ end -}}
+

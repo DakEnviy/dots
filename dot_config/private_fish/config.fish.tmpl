@@ -1,0 +1,25 @@
+{{ if .installed.fish -}}
+# Load user configurations (it is needed to separate fisher and user configurations)
+for file in "$__fish_config_dir"/user.{functions,conf.d,completions}/*.fish
+    source "$file"
+end
+
+# Theme kawasaki settings
+set -gx fish_prompt_pwd_dir_length 0
+set -g theme_display_time yes
+set -g theme_display_group no
+set -g theme_display_rw no
+
+{{ if .enabled.fishFzf -}}
+# fzf.fish settings
+set fzf_fd_opts --hidden --exclude=.git
+{{ if .installed.eza -}}
+set fzf_preview_dir_cmd eza -la --group-directories-first --icons --no-permissions --no-user --no-filesize --no-time
+{{ end -}}
+{{ if .installed.delta -}}
+set fzf_diff_highlighter delta --paging=never --width=20
+{{ end -}}
+
+{{ end -}}
+{{ end -}}
+

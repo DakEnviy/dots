@@ -2,12 +2,14 @@
 
 - [x] Implement app detection and base apps config
 - [x] Add ranger
-- [ ] Add fish
+- [x] Add fish
 - [ ] Add all simple apps
+- [ ] Add and configure fifc
+- [ ] Add pnpm
 
 **Apps**
 
-- [ ] fish
+- [x] fish
 - [ ] fish:nvm
 - [ ] eza:fish
 - [ ] vim

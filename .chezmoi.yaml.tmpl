@@ -1,18 +1,30 @@
-{{- define "installed" -}}
-{{- $homeDir := env "$HOME" -}}
+{{- $apps := list
+      "bat"
+      "delta"
+      "eza"
+      "fd"
+      "fish"
+      "fzf"
+      "gpg"
+      "kitty"
+      "ranger"
+-}}
+
 {{- $homePath := list
-    (joinPath $homeDir ".local/bin")
-    (joinPath $homeDir ".cargo/bin")
-    (joinPath $homeDir ".go/bin")
+      (joinPath .chezmoi.homeDir ".local" "bin")
+      (joinPath .chezmoi.homeDir ".cargo" "bin")
+      (joinPath .chezmoi.homeDir ".go" "bin")
 -}}
 {{- $path := concat (splitList ":" (env "PATH")) $homePath -}}
-{{- if findOneExecutable . $path -}}true{{- else -}}false{{- end -}}
+
+{{- $installed := dict -}}
+{{- range $apps -}}
+{{- $_ := set $installed . (findExecutable . $path) -}}
 {{- end -}}
 
 data:
-  apps:
-    ranger:
-      installed: {{ template "installed" "ranger" }}
-    kitty:
-      installed: {{ template "installed" "kitty" }}
+  installed:
+    {{- toYaml $installed | trim | nindent 4 }}
+  enabled:
+    fishFzf: {{ all $installed.fish $installed.fzf $installed.fd $installed.bat }}
 
