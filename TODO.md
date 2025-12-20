@@ -4,7 +4,8 @@
 - [x] Add ranger
 - [x] Add fish
 - [x] Add alias for chezmoi
-- [ ] Add vim
+- [x] Add vim
+- [ ] Add and configure fifc
 - [ ] Add tmux
 - [ ] Add starship
 - [ ] Add macos-python:fish
@@ -12,7 +13,6 @@
 - [ ] Add all fish integrations
 - [ ] Add git
 - [ ] Fix fish command highlighting
-- [ ] Add and configure fifc
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
 - [ ] Add pnpm
@@ -22,8 +22,8 @@
 - [x] fish
 - [ ] fish:nvm
 - [ ] eza:fish
-- [ ] vim
-- [ ] vim:fish
+- [x] vim
+- [x] vim:fish
 - [ ] tmux
 - [ ] tmux:fish
 - [x] ranger

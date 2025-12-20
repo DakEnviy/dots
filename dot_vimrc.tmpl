@@ -1,0 +1,64 @@
+{{ if .installed.vim -}}
+call plug#begin()
+
+" Theming
+Plug 'dikiaap/minimalist'
+Plug 'tribela/vim-transparent'
+
+" Features
+Plug 'easymotion/vim-easymotion'
+Plug 'jasonccox/vim-wayland-clipboard'
+
+" Syntax
+Plug 'dag/vim-fish'
+Plug 'hashivim/vim-terraform'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'petRUShka/vim-sage'
+Plug 'imsnif/kdl.vim'
+
+call plug#end()
+
+colorscheme minimalist
+
+" Indentation settings
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set expandtab
+set smartindent
+
+" Style settings
+set nowrap
+set number
+set hlsearch
+set modeline
+
+" Keybindings
+nnoremap ,<space> :nohlsearch<CR>
+noremap ,c "+y
+noremap ,b "+p
+
+" Fix backspace in insert mode
+set nocompatible
+set backspace=indent,eol,start
+
+" Absolute numbers only in insert mode and other windows
+augroup numbertoggle
+    autocmd!
+    autocmd InsertLeave,BufEnter,WinEnter * if &nu && mode() != 'i' | set rnu   | endif
+    autocmd InsertEnter,BufLeave,WinLeave * if &nu                  | set nornu | endif
+augroup END
+
+" Easy Motion configuration
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+map s <Plug>(easymotion-s2)
+map <Leader>/ <Plug>(easymotion-sn)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>w <Plug>(easymotion-wl)
+map <Leader>e <Plug>(easymotion-el)
+map <Leader>b <Plug>(easymotion-bl)
+
+{{ end -}}
+
