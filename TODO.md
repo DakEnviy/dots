@@ -1,5 +1,6 @@
 **Tasks**
 
+- [x] Implement app detection and base apps config
 - [ ] Add ranger
 - [ ] Add fish
 - [ ] Add all simple apps
