@@ -21,7 +21,7 @@
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
 - [ ] Add pnpm
-- [ ] Try to make nvm optional
+- [ ] Try to make nvm and npm.fish optional
 
 **Apps**
 
@@ -37,7 +37,7 @@
 - [x] brew:fish
 - [x] macos-python:fish
 - [x] podman:fish
-- [ ] npm:fish
+- [x] npm:fish
 - [ ] rust:fish
 - [ ] go:fish
 - [ ] kubectl:fish
