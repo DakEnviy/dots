@@ -1,5 +1,6 @@
 {{- $apps := list
       "bat"
+      "brew"
       "chezmoi"
       "delta"
       "eza"
@@ -16,15 +17,18 @@
 -}}
 
 {{- $homePath := list
-      (joinPath .chezmoi.homeDir ".local" "bin")
-      (joinPath .chezmoi.homeDir ".cargo" "bin")
-      (joinPath .chezmoi.homeDir ".go" "bin")
+      (joinPath .chezmoi.homeDir ".local/bin")
+      (joinPath .chezmoi.homeDir ".cargo/bin")
+      (joinPath .chezmoi.homeDir ".go/bin")
 -}}
 {{- $path := concat (splitList ":" (env "PATH")) $homePath -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $path = append $path "/opt/homebrew/bin" -}}
+{{- end -}}
 
 {{- $installed := dict -}}
 {{- range $apps -}}
-{{- $_ := set $installed . (findExecutable . $path) -}}
+{{-   $_ := set $installed . (findExecutable . $path) -}}
 {{- end -}}
 
 data:

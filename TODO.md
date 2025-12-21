@@ -16,6 +16,7 @@
 - [ ] Fix Ctrl+H in ranger and Ctrl+j,k in fzf for tmux session
 - [ ] Check fifc additional tools
 - [ ] Fix new lines in all files
+- [ ] Rename installed to binaries and enabled to features
 - [ ] Update starship config and double-check arc there
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
@@ -33,7 +34,7 @@
 - [x] tmux:fish
 - [x] ranger
 - [x] ranger:fish
-- [ ] brew:fish
+- [x] brew:fish
 - [x] macos-python:fish
 - [ ] podman:fish
 - [ ] npm:fish
