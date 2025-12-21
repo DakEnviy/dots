@@ -39,7 +39,7 @@
 - [x] podman:fish
 - [x] npm:fish
 - [ ] rust:fish
-- [ ] go:fish
+- [x] go:fish
 - [ ] kubectl:fish
 - [ ] yc:fish
 - [ ] git
