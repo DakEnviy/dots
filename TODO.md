@@ -41,7 +41,7 @@
 - [ ] rust:fish
 - [x] go:fish
 - [x] kubectl:fish
-- [ ] yc:fish
+- [x] yc:fish
 - [ ] git
 - [ ] ssh-agent
 - [x] starship

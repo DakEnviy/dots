@@ -1,0 +1,5 @@
+{{ if and .installed.fish .installed.yc .installed.aws -}}
+alias ycs3 'aws s3 --endpoint-url=https://storage.yandexcloud.net'
+
+{{ end -}}
+
