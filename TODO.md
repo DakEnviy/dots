@@ -48,6 +48,6 @@
 - [x] starship:fish
 - [x] bat:fish
 - [ ] jumoreski:fish
-- [ ] gpg:fish
+- [x] gpg:fish
 - [ ] delta:fish
 
