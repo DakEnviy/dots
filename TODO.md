@@ -26,7 +26,7 @@
 
 - [x] fish
 - [x] fish:nvm
-- [ ] eza:fish
+- [x] eza:fish
 - [x] vim
 - [x] vim:fish
 - [x] tmux

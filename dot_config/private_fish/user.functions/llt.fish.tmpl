@@ -1,0 +1,11 @@
+{{ if and .installed.fish .installed.eza -}}
+function llt
+    if test -z "$argv[1]"
+        eza -lg --tree --icons --octal-permissions
+    else
+        eza -lg --tree --icons --octal-permissions -L "$argv[1]"
+    end
+end
+
+{{ end -}}
+
