@@ -32,7 +32,7 @@
 - [x] tmux
 - [x] tmux:fish
 - [x] ranger
-- [ ] ranger:fish
+- [x] ranger:fish
 - [ ] brew:fish
 - [x] macos-python:fish
 - [ ] podman:fish
