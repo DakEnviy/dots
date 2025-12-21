@@ -40,7 +40,7 @@
 - [x] npm:fish
 - [ ] rust:fish
 - [x] go:fish
-- [ ] kubectl:fish
+- [x] kubectl:fish
 - [ ] yc:fish
 - [ ] git
 - [ ] ssh-agent
