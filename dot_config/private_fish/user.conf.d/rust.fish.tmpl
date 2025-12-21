@@ -1,0 +1,6 @@
+{{ if and .installed.fish .installed.cargo -}}
+set -gx CARGOPATH "$HOME/.cargo"
+set -gx PATH "$CARGOPATH/bin:$PATH"
+
+{{ end -}}
+

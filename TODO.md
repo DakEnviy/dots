@@ -10,7 +10,7 @@
 - [x] Add starship
 - [x] Add macos-python:fish
 - [x] Add fish:nvm
-- [ ] Add all fish integrations
+- [x] Add all fish integrations
 - [ ] Add git
 - [ ] Fix fish command highlighting
 - [ ] Fix Ctrl+H in ranger and Ctrl+j,k in fzf for tmux session
@@ -38,7 +38,7 @@
 - [x] macos-python:fish
 - [x] podman:fish
 - [x] npm:fish
-- [ ] rust:fish
+- [x] rust:fish
 - [x] go:fish
 - [x] kubectl:fish
 - [x] yc:fish
