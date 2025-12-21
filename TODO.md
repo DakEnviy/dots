@@ -46,7 +46,7 @@
 - [ ] ssh-agent
 - [x] starship
 - [x] starship:fish
-- [ ] bat:fish
+- [x] bat:fish
 - [ ] jumoreski:fish
 - [ ] gpg:fish
 - [ ] delta:fish

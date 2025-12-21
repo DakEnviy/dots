@@ -1,0 +1,8 @@
+{{ if and .installed.fish .installed.bat -}}
+set -gx BAT_THEME 'TwoDark'
+set -gx MANPAGER "sh -c 'col -bx | bat -p -l man'"
+
+alias bathelp 'bat -p -l help'
+
+{{ end -}}
+
