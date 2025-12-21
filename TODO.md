@@ -8,7 +8,7 @@
 - [x] Add and configure fifc
 - [x] Add tmux
 - [x] Add starship
-- [ ] Add macos-python:fish
+- [x] Add macos-python:fish
 - [ ] Add fish:nvm
 - [ ] Add all fish integrations
 - [ ] Add git
@@ -33,7 +33,7 @@
 - [x] ranger
 - [ ] ranger:fish
 - [ ] brew:fish
-- [ ] macos-python:fish
+- [x] macos-python:fish
 - [ ] podman:fish
 - [ ] npm:fish
 - [ ] rust:fish
