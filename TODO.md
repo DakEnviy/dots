@@ -36,7 +36,7 @@
 - [x] ranger:fish
 - [x] brew:fish
 - [x] macos-python:fish
-- [ ] podman:fish
+- [x] podman:fish
 - [ ] npm:fish
 - [ ] rust:fish
 - [ ] go:fish
