@@ -10,6 +10,19 @@ set -g theme_display_time yes
 set -g theme_display_group no
 set -g theme_display_rw no
 
+{{ if or .installed.fd .installed.bat .installed.vim -}}
+# fifc settings
+{{ if .installed.fd -}}
+set fifc_fd_opts --hidden --exclude=.git
+{{ end -}}
+{{ if .installed.bat -}}
+set fifc_bat_opts --style=numbers --color=always
+{{ end -}}
+{{ if .installed.vim -}}
+set fifc_editor vim
+{{ end -}}
+{{ end -}}
+
 {{ if .enabled.fishFzf -}}
 # fzf.fish settings
 set fzf_fd_opts --hidden --exclude=.git

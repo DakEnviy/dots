@@ -5,7 +5,7 @@
 - [x] Add fish
 - [x] Add alias for chezmoi
 - [x] Add vim
-- [ ] Add and configure fifc
+- [x] Add and configure fifc
 - [ ] Add tmux
 - [ ] Add starship
 - [ ] Add macos-python:fish
@@ -13,6 +13,9 @@
 - [ ] Add all fish integrations
 - [ ] Add git
 - [ ] Fix fish command highlighting
+- [ ] Fix Ctrl+H in ranger and Ctrl+j,k in fzf for tmux session
+- [ ] Check fifc additional tools
+- [ ] Fix new lines in all files
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
 - [ ] Add pnpm
