@@ -1,0 +1,469 @@
+{{ if .installed.starship -}}
+'$schema' = 'https://starship.rs/config-schema.json'
+
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+${custom.arc_branch}\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$direnv\
+$env_var\
+$crystal\
+$sudo\
+$cmd_duration\
+$fill\
+$time\
+$line_break\
+$jobs\
+$battery\
+$os\
+$container\
+$shell\
+$character"""
+right_format = '$status'
+add_newline = true
+# TODO: Uncomment it after updating to new version of starship
+# follow_symlinks = false
+
+[aws]
+format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+symbol = '  '
+disabled = true
+
+[azure]
+format = '[$symbol($subscription)]($style) '
+symbol = ' '
+
+[buf]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[bun]
+format = '[$symbol($version )]($style)'
+symbol = '󰳮 '
+
+[c]
+format = '[$symbol($version(-$name) )]($style)'
+symbol = ' '
+
+[character]
+format = '$symbol '
+success_symbol = '[❯](bold blue)'
+error_symbol = '[❯](bold red)'
+vimcmd_symbol = '[❮](bold blue)'
+vimcmd_replace_one_symbol = '[❮](bold purple)'
+vimcmd_replace_symbol = '[❮](bold purple)'
+vimcmd_visual_symbol = '[❮](bold yellow)'
+
+[cmake]
+format = '[$symbol($version )]($style)'
+symbol = '△ '
+
+[cobol]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[cmd_duration]
+format = '[󰁫 $duration]($style) '
+
+[conda]
+format = '[$symbol$environment]($style) '
+symbol = ' '
+
+[crystal]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[daml]
+format = '[$symbol($version )]($style)'
+symbol = 'Λ '
+
+[dart]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[deno]
+format = '[$symbol($version )]($style)'
+symbol = '🦕 '
+
+[directory]
+format = '[$path]($style)[$read_only]($read_only_style) '
+truncation_length = 100
+truncate_to_repo = false
+read_only = ' 󰌾'
+
+[docker_context]
+format = '[$symbol$context]($style) '
+symbol = ' '
+
+[dotnet]
+format = '[$symbol($version )(🎯 $tfm )]($style)'
+symbol = '.NET '
+
+[elixir]
+format = '[$symbol($version \(OTP $otp_version\) )]($style)'
+symbol = ' '
+
+[elm]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[erlang]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[fennel]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[fill]
+symbol = ' '
+
+[fossil_branch]
+format = '[$symbol$branch]($style) '
+symbol = ' '
+
+[gcloud]
+format = '[$symbol$account(@$domain)(\($region\))]($style) '
+symbol = '󱇶 '
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+symbol = ' '
+
+[git_commit]
+format = '[\($hash$tag\)]($style) '
+tag_symbol = '  '
+tag_disabled = false
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+conflicted = '[=$count](bold red)'
+ahead = '[↑$count](bold white)'
+behind = '[↓$count](bold white)'
+diverged = '[↑$ahead_count↓$behind_count](bold white)'
+up_to_date = ''
+untracked = '[?$count](bold red)'
+stashed = '[\$$count](bold cyan)'
+modified = '[!$count](bold red)'
+staged = '[+$count](bold green)'
+renamed = '[>$count](bold green)'
+deleted = '[x$count](bold yellow)'
+typechanged = ''
+style = ''
+
+[golang]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[guix_shell]
+format = '[$symbol]($style) '
+symbol = ' '
+
+[gradle]
+format = '[$symbol($version )]($style)'
+symbol = '🅶 '
+
+[haskell]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[haxe]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[helm]
+format = '[$symbol($version )]($style)'
+symbol = '󰠳 '
+
+[hg_branch]
+format = '[$symbol$branch(:$topic)]($style) '
+symbol = ' '
+
+[hostname]
+format = '[$ssh_symbol$hostname]($style) '
+style = 'bold green'
+ssh_symbol = ' '
+
+[java]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[jobs]
+format = '[$symbol $number]($style) '
+
+[julia]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[kotlin]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[kubernetes]
+format = '[$symbol$context( \($namespace\))]($style) '
+symbol = '󱃾 '
+
+[lua]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[memory_usage]
+format = '$symbol[$ram( \| $swap)]($style) '
+symbol = '󰍛 '
+
+[meson]
+format = '[$symbol$project]($style) '
+symbol = '󰔷 '
+
+[nim]
+format = '[$symbol($version )]($style)'
+symbol = '󰆥 '
+
+[nix_shell]
+format = '[$symbol$state( \($name\))]($style) '
+symbol = ' '
+
+[nodejs]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[ocaml]
+format = '[$symbol($version )(\($switch_indicator$switch_name\) )]($style)'
+symbol = ' '
+
+[opa]
+format = '[$symbol($version )]($style)'
+symbol = '󰥯 '
+
+[openstack]
+format = '[$symbol$cloud(\($project\))]($style) '
+symbol = '󰞶 '
+
+[os.symbols]
+Alpaquita = ' '
+Alpine = ' '
+Amazon = ' '
+Android = ' '
+Arch = ' '
+Artix = ' '
+CentOS = ' '
+Debian = ' '
+DragonFly = ' '
+Emscripten = ' '
+EndeavourOS = ' '
+Fedora = ' '
+FreeBSD = ' '
+Garuda = '󰛓 '
+Gentoo = ' '
+HardenedBSD = '󰞌 '
+Illumos = '󰈸 '
+Linux = ' '
+Mabox = ' '
+Macos = ' '
+Manjaro = ' '
+Mariner = ' '
+MidnightBSD = ' '
+Mint = ' '
+NetBSD = ' '
+NixOS = ' '
+OpenBSD = '󰈺 '
+openSUSE = ' '
+OracleLinux = '󰌷 '
+Pop = ' '
+Raspbian = ' '
+Redhat = ' '
+RedHatEnterprise = ' '
+Redox = '󰀘 '
+Solus = '󰠳 '
+SUSE = ' '
+Ubuntu = ' '
+Unknown = ' '
+Windows = '󰍲 '
+
+[package]
+format = '[$symbol$version]($style) '
+symbol = '󰏗 '
+
+[perl]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[php]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[pijul_channel]
+format = '[$symbol$channel]($style) '
+symbol = ' '
+
+[pulumi]
+format = '[$symbol($username@)$stack]($style) '
+symbol = ' '
+
+[purescript]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = ' '
+
+[rlang]
+format = '[$symbol($version )]($style)'
+symbol = '󰟔 '
+
+[raku]
+format = '[$symbol($version-$vm_version )]($style)'
+symbol = '󱖉 '
+
+[red]
+format = '[$symbol($version )]($style)'
+symbol = '󰔶 '
+
+[ruby]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[rust]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[scala]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[solidity]
+format = '[$symbol($version )]($style)'
+symbol = 'S '
+
+[spack]
+format = '[$symbol$environment]($style) '
+symbol = '🅢 '
+
+[sudo]
+format = '[$symbol]($style)'
+symbol = ' '
+style = 'bold red'
+
+# TODO: Move status to right_prompt
+[status]
+format = '[( $status$symbol)]($style)'
+symbol = ' 󰌑 '
+style = 'red'
+disabled = false
+
+[swift]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[terraform]
+format = '[$symbol$workspace( $version)]($style) '
+symbol = '󱁢 '
+
+[time]
+format = ' [$time]($style)'
+style = 'dimmed blue'
+disabled = false
+
+# TODO: Uncomment it after updating to new version of starship
+# [typst]
+# format = '[$symbol($version )]($style)'
+# symbol = 't '
+
+[username]
+format = '[$user]($style) '
+
+[vagrant]
+format = '[$symbol($version )]($style)'
+symbol = '⍱ '
+
+[vlang]
+format = '[$symbol($version )]($style)'
+symbol = 'V '
+
+[zig]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[custom.arc_branch]
+format = '[$symbol($output )]($style)'
+symbol = ' '
+style = 'bold purple'
+command = ''' arc info --json | jq -r '.branch' '''
+when = 'arc rev-parse --quiet'
+
+{{ end -}}
+

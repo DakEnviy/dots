@@ -7,7 +7,7 @@
 - [x] Add vim
 - [x] Add and configure fifc
 - [x] Add tmux
-- [ ] Add starship
+- [x] Add starship
 - [ ] Add macos-python:fish
 - [ ] Add fish:nvm
 - [ ] Add all fish integrations
@@ -16,6 +16,7 @@
 - [ ] Fix Ctrl+H in ranger and Ctrl+j,k in fzf for tmux session
 - [ ] Check fifc additional tools
 - [ ] Fix new lines in all files
+- [ ] Update starship config and double-check arc there
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
 - [ ] Add pnpm
@@ -41,8 +42,8 @@
 - [ ] yc:fish
 - [ ] git
 - [ ] ssh-agent
-- [ ] starship
-- [ ] starship:fish
+- [x] starship
+- [x] starship:fish
 - [ ] bat:fish
 - [ ] jumoreski:fish
 - [ ] gpg:fish

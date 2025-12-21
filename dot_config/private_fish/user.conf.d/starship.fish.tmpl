@@ -1,0 +1,7 @@
+{{ if and .installed.fish .installed.starship -}}
+if status is-interactive
+    starship init fish | source
+end
+
+{{ end -}}
+
