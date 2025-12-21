@@ -1,0 +1,9 @@
+{{ if and .installed.fish .installed.tmux -}}
+alias tn 'tmux new-session -s "$fish_pid"'
+
+if status is-interactive
+    trap 'tmux kill-session -t "$fish_pid" 2>/dev/null' EXIT
+end
+
+{{ end -}}
+

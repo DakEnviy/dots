@@ -6,7 +6,7 @@
 - [x] Add alias for chezmoi
 - [x] Add vim
 - [x] Add and configure fifc
-- [ ] Add tmux
+- [x] Add tmux
 - [ ] Add starship
 - [ ] Add macos-python:fish
 - [ ] Add fish:nvm
@@ -27,8 +27,8 @@
 - [ ] eza:fish
 - [x] vim
 - [x] vim:fish
-- [ ] tmux
-- [ ] tmux:fish
+- [x] tmux
+- [x] tmux:fish
 - [x] ranger
 - [ ] ranger:fish
 - [ ] brew:fish

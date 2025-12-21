@@ -1,0 +1,118 @@
+{{ if .installed.tmux -}}
+# vim style tmux config
+
+# use C-a, since it's on the home row and easier to hit than C-b
+set-option -g prefix C-a
+unbind-key C-a
+bind-key C-a send-prefix
+set -g base-index 1
+
+# easy config reload
+bind-key R source-file ~/.tmux.conf \; display-message 'tmux.conf reloaded.'
+
+# vi is good
+setw -g mode-keys vi
+
+# mouse behavior
+setw -g mouse on
+
+# terminal colors
+set-option -g default-terminal screen-256color
+
+# default shell
+# set -g default-shell /bin/fish
+# set -g default-command /bin/fish
+
+# utils
+bind-key : command-prompt
+bind-key r refresh-client
+bind-key L clear-history
+
+# window managing
+bind-key c new-window
+bind-key space next-window
+bind-key t next-window
+bind-key bspace previous-window
+bind-key T previous-window
+bind-key C-o rotate-window
+
+# layout managing
+bind-key enter next-layout
+bind-key + select-layout main-horizontal
+bind-key = select-layout main-vertical
+bind-key q display-panes
+bind-key a last-pane
+bind-key x kill-pane
+
+# use vim-like keys for splits and windows
+bind-key v split-window -h
+bind-key s split-window -v
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+
+# smart pane switching with awareness of vim splits
+bind-key -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-h) || tmux select-pane -L"
+bind-key -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-j) || tmux select-pane -D"
+bind-key -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-k) || tmux select-pane -U"
+bind-key -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-l) || tmux select-pane -R"
+bind-key -n 'C-\' run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+bind-key C-l send-keys 'C-l'
+
+# window options
+set-window-option -g other-pane-height 25
+set-window-option -g other-pane-width 80
+set-window-option -g display-panes-time 1500
+set-window-option -g window-status-current-style fg=magenta
+
+# buffer bindings
+bind-key [ copy-mode
+bind-key ] paste-buffer
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+
+# set window notifications
+setw -g monitor-activity on
+set -g visual-activity on
+
+# allow the arrow key to be used immediately after changing windows
+set-option -g repeat-time 0
+
+# status bar
+set -g status 'on'
+set-option -g status-interval 1
+set-option -g status-position top
+set -g status-justify 'centre'
+set -g status-left-length '100'
+set -g status-right-length '100'
+set -g status-bg default
+set -g status-fg white
+set-option -g status-style bg=default
+set-option -g status-style fg=white
+set-option -g window-status-style bg=default
+set-option -g window-status-style fg=white
+set-option -g window-status-activity-style bg=default
+set-option -g window-status-activity-style fg=green
+set-option -g message-style bg=default
+set-option -g message-style fg=yellow
+set-option -g message-command-style bg=default
+set-option -g message-command-style fg=yellow
+set-option -g pane-border-style fg=white
+set-option -g pane-active-border-style fg=blue
+set -g status-left '#[bg=white,fg=black] #S #[bg=default,fg=white] uptime: #(uptime | awk -F, "{print \$1,\$2}" | sed "s/:/h /g;s/^.*up *//; s/ *[0-9]* user.*//;s/[0-9]\$/&m/;s/ day. */d /g") '
+set -g status-right '#[bg=default,fg=white] %H:%M | %d-%m-%Y #[bg=white,fg=black] #(whoami)@#h '
+set -g window-status-format '#[default] #I - #W '
+set -g window-status-current-format '#[bg=white,fg=black] #I - #W '
+set -g window-status-separator ''
+set -g status 2
+set -g 'status-format[1]' ''
+
+# list of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-yank'
+
+# initialize tmux plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+
+{{ end -}}
+
