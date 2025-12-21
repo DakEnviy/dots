@@ -1,0 +1,7 @@
+{{ if and .installed.fish .installed.rg .installed.delta -}}
+function rgd
+    rg --json -C 2 $argv | delta
+end
+
+{{ end -}}
+

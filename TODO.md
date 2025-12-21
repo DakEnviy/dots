@@ -49,5 +49,5 @@
 - [x] bat:fish
 - [ ] jumoreski:fish
 - [x] gpg:fish
-- [ ] delta:fish
+- [x] delta:fish
 
