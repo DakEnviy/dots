@@ -9,7 +9,7 @@
 - [x] Add tmux
 - [x] Add starship
 - [x] Add macos-python:fish
-- [ ] Add fish:nvm
+- [x] Add fish:nvm
 - [ ] Add all fish integrations
 - [ ] Add git
 - [ ] Fix fish command highlighting
@@ -20,11 +20,12 @@
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
 - [ ] Add pnpm
+- [ ] Try to make nvm optional
 
 **Apps**
 
 - [x] fish
-- [ ] fish:nvm
+- [x] fish:nvm
 - [ ] eza:fish
 - [x] vim
 - [x] vim:fish

@@ -1,0 +1,25 @@
+{{ if .installed.fish -}}
+set -U nvm_default_version 'lts'
+
+function __ensure_nvm --description 'Ensure that the correct node version is used' --on-variable PWD
+    if test -f .nvmrc
+        set node_version (node -v)
+        set node_version_target (cat .nvmrc | string trim)
+        set nvmrc_node_version (nvm list | grep "$node_version_target")
+
+        if string match -q -- "*$node_version" "$nvmrc_node_version"
+            # already current node version
+        else if not set -q "$nvmrc_node_version"
+            nvm install "$node_version_target" >/dev/null
+        else
+            nvm use "$node_version_target" >/dev/null
+        end
+    end
+end
+
+if status is-interactive
+    __ensure_nvm
+end
+
+{{ end -}}
+
