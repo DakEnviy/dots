@@ -1,0 +1,99 @@
+{{ if and .installed.fish .installed.gpg -}}
+set -gx GPG_TTY (tty)
+
+{{ if and .installed.bw .installed.jq .installed.fzf -}}
+function bw-gpg-import -d "Import gpg key from bitwarden"
+    # TODO: Make SEARCH_TERM variable
+    set SEARCH_TERM 'gpg'
+
+    if test -z "$BW_SESSION"
+        set -x BW_SESSION (bw unlock --raw)
+    end
+    if test -z "$BW_SESSION"
+        echo "Bitwarden locked" >&2
+        return 1
+    end
+
+    bw sync >/dev/null
+
+    set note (bw get notes "$SEARCH_TERM" 2>/dev/null | string collect)
+    if test -z "$note"
+        echo "Note with GPG key is not found. Search term used: \"$SEARCH_TERM\"" >&2
+        return 1
+    end
+
+    echo "$note" | gpg --import
+end
+
+function bw-gpg-choose -d "Choose subkey and delete others"
+    set SEARCH_TERM 'gpg'
+
+    if test -z "$BW_SESSION"
+        set -x BW_SESSION (bw unlock --raw)
+    end
+    if test -z "$BW_SESSION"
+        echo "Bitwarden locked" >&2
+        return 1
+    end
+
+    bw sync >/dev/null
+
+    set item_json (bw get item "$SEARCH_TERM" 2>/dev/null)
+    if test -z "$item_json"
+        echo "Item with GPG key is not found. Search term used: \"$SEARCH_TERM\"" >&2
+        return 1
+    end
+
+    set remote_key_ids (echo "$item_json" | jq -r '.notes' | gpg --list-packets 2>/dev/null | awk '$1=="keyid:"{print $2}')
+    if test -z "$remote_key_ids"
+        echo "GPG key is not found in the note" >&2
+        return 1
+    end
+
+    set main_key_id "$remote_key_ids[1]"
+    set remote_subkey_ids (printf "%s\n" $remote_key_ids[2..] | sort)
+
+    set meta_subkey_ids (echo "$item_json" | jq -r '.fields.[].value' | sort)
+    if test "$meta_subkey_ids" != "$remote_subkey_ids"
+        echo "Meta is mismatched for subkeys" >&2
+        echo "Meta: $meta_subkey_ids" >&2
+        echo "Note: $remote_subkey_ids" >&2
+        return 1
+    end
+
+    set local_data (gpg --list-keys --with-colons "$main_key_id" 2>/dev/null | string collect)
+    if test -z (echo "$local_data" | awk -F ':' '$1=="pub"{print $5}')
+        echo "Key \"$main_key_id\" is not found localy" >&2
+        return 1
+    end
+
+    set local_subkey_ids (echo "$local_data" | awk -F ':' '$1=="sub"{print $5}' | sort)
+    if test "$local_subkey_ids" != "$remote_subkey_ids"
+        echo "Local and remote subkeys are different" >&2
+        echo "Local:  $local_subkey_ids" >&2
+        echo "Remote: $remote_subkey_ids" >&2
+        return 1
+    end
+
+    set chosen_subkey_id (echo "$item_json" | \
+        jq -r '.fields.[] | .name + " - " + .value' | \
+        fzf --reverse --no-input --height (count $meta_subkey_ids) | \
+        awk -F ' - ' '{print $2}')
+
+    for subkey_id in $local_subkey_ids
+        if test "$subkey_id" != "$chosen_subkey_id"
+            set subkey_fpr (echo "$local_data" | awk -F ':' "/^fpr:.*$subkey_id:\$/{print \$10}")
+            gpg --batch --yes --delete-secret-and-public-key "$subkey_fpr!" 2>/dev/null
+            echo "Key deleted: $subkey_id"
+        end
+    end
+
+    set main_key_fpr (echo "$local_data" | awk -F ':' "/^fpr:.*$main_key_id:\$/{print \$10}")
+    gpg --batch --yes --delete-secret-key "$main_key_fpr!" 2>/dev/null
+    echo "Secret key deleted: $main_key_id"
+end
+
+{{ end -}}
+
+{{ end -}}
+
