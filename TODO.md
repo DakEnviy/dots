@@ -21,7 +21,7 @@
   - [x] Prompt name and email
   - [x] Add signingkey to the config
 - [x] Fix fish command highlighting
-- [ ] Fix Ctrl+H in ranger and Ctrl+j,k in fzf for tmux session
+- [x] Fix Ctrl+H in ranger and Ctrl+j,k in fzf for tmux session
 - [ ] Highlight TODO in vim
 - [ ] Add additional aliases in gitconfig
 - [ ] Check fifc additional tools
