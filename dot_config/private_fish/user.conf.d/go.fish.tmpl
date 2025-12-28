@@ -1,4 +1,4 @@
-{{ if and .installed.fish .installed.go -}}
+{{ if and .binaries.fish .binaries.go -}}
 set -gx GOPATH "$HOME/.go"
 set -gx PATH "$GOPATH/bin:$PATH"
 

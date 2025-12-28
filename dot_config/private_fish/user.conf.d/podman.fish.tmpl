@@ -1,4 +1,4 @@
-{{ if and .installed.fish .installed.podman -}}
+{{ if and .binaries.fish .binaries.podman -}}
 alias docker 'podman'
 
 {{ end -}}

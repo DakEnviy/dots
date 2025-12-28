@@ -45,14 +45,14 @@ Other useful apps:
 {{-   $path = append $path "/opt/homebrew/bin" -}}
 {{- end -}}
 
-{{- $installed := dict -}}
+{{- $binaries := dict -}}
 {{- range $apps -}}
-{{-   $_ := set $installed . (findExecutable . $path) -}}
+{{-   $_ := set $binaries . (findExecutable . $path) -}}
 {{- end -}}
 
 {{- $gpgSearchTerm := dig "gpg" "searchTerm" "gpg" . -}}
 {{- $gpgMainKeyId := dig "gpg" "mainKeyId" "" . -}}
-{{- if and $installed.gpg $installed.bw -}}
+{{- if and $binaries.gpg $binaries.bw -}}
 {{-   $prevGpgSearchTerm := $gpgSearchTerm -}}
 {{-   $gpgSearchTerm = promptStringOnce . "gpg.searchTerm" "Search term or ID for GPG key in Bitwarden" $gpgSearchTerm -}}
 {{-   if or (not $gpgMainKeyId) (ne $gpgSearchTerm $prevGpgSearchTerm) (promptBoolOnce . "gpg.refresh" "Refresh GPG key" false) -}}
@@ -64,16 +64,16 @@ Other useful apps:
 
 {{- $gitName := dig "git" "name" "" . -}}
 {{- $gitEmail := dig "git" "email" "" . -}}
-{{- if $installed.git -}}
+{{- if $binaries.git -}}
 {{-   $gitName = promptStringOnce . "git.name" "Name for git" $gitName -}}
 {{-   $gitEmail = promptStringOnce . "git.email" "Email for git" $gitEmail -}}
 {{- end -}}
 
 data:
-  installed:
-    {{- toYaml $installed | trim | nindent 4 }}
+  binaries:
+    {{- toYaml $binaries | trim | nindent 4 }}
   enabled:
-    fishFzf: {{ all $installed.fish $installed.fzf $installed.fd $installed.bat }}
+    fishFzf: {{ all $binaries.fish $binaries.fzf $binaries.fd $binaries.bat }}
   gpg:
     searchTerm: {{ $gpgSearchTerm | quote }}
     mainKeyId: {{ $gpgMainKeyId | quote }}
@@ -82,13 +82,13 @@ data:
     name: {{ $gitName | quote }}
     email: {{ $gitEmail | quote }}
 
-{{ if $installed.bw -}}
+{{ if $binaries.bw -}}
 bitwarden:
   unlock: true
 
 {{ end -}}
 
-{{ if $installed.delta -}}
+{{ if $binaries.delta -}}
 diff:
   pager: delta
 

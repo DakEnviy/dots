@@ -1,4 +1,4 @@
-{{ if .installed.fish -}}
+{{ if .binaries.fish -}}
 set -U nvm_default_version 'lts'
 
 function __ensure_nvm --description 'Ensure that the correct node version is used' --on-variable PWD

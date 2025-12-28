@@ -1,7 +1,7 @@
-{{ if and .installed.fish .installed.gpg -}}
+{{ if and .binaries.fish .binaries.gpg -}}
 set -gx GPG_TTY (tty)
 
-{{ if and .gpg.searchTerm .installed.bw .installed.jq .installed.fzf -}}
+{{ if and .gpg.searchTerm .binaries.bw .binaries.jq .binaries.fzf -}}
 function bw-gpg-import -d "Import gpg key from bitwarden"
     set SEARCH_TERM {{ .gpg.searchTerm | quote }}
 

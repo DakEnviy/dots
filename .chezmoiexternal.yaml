@@ -1,4 +1,4 @@
-{{ if .installed.vim -}}
+{{ if .binaries.vim -}}
 .vim/autoload/plug.vim:
   type: file
   url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -6,7 +6,7 @@
 
 {{ end -}}
 
-{{ if .installed.tmux -}}
+{{ if .binaries.tmux -}}
 .tmux/plugins/tpm:
   type: archive
   url: https://github.com/tmux-plugins/tpm/archive/master.tar.gz
@@ -16,7 +16,7 @@
 
 {{ end -}}
 
-{{ if .installed.ranger -}}
+{{ if .binaries.ranger -}}
 .config/ranger/plugins/ranger_devicons:
   type: archive
   url: https://github.com/alexanderjeurissen/ranger_devicons/archive/main.tar.gz

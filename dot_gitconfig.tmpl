@@ -1,4 +1,4 @@
-{{ if .installed.git -}}
+{{ if .binaries.git -}}
 [user]
     name = {{ .git.name }}
     email = {{ .git.email }}
@@ -23,14 +23,14 @@
 
 [core]
     autocrlf = input
-    {{- if .installed.vim }}
+    {{- if .binaries.vim }}
     editor = vim
     {{- end }}
-    {{- if .installed.delta }}
+    {{- if .binaries.delta }}
     pager = delta
     {{- end }}
 
-{{ if .installed.delta -}}
+{{ if .binaries.delta -}}
 [interactive]
     diffFilter = delta --color-only
 

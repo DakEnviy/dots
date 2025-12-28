@@ -1,4 +1,4 @@
-{{ if .installed.vim -}}
+{{ if .binaries.vim -}}
 #!/usr/bin/env bash
 
 # hash: {{ includeTemplate "dot_vimrc.tmpl" . | sha256sum }}
