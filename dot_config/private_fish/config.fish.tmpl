@@ -16,27 +16,29 @@ set -U theme_display_rw no
 
 {{ if or .installed.fd .installed.bat .installed.vim -}}
 # fifc settings
-{{ if .installed.fd -}}
+{{- if .installed.fd }}
 set fifc_fd_opts --hidden --exclude=.git
-{{ end -}}
-{{ if .installed.bat -}}
+{{- end }}
+{{- if .installed.bat }}
 set fifc_bat_opts --style=numbers --color=always
-{{ end -}}
-{{ if .installed.vim -}}
+{{- end }}
+{{- if .installed.vim }}
 set fifc_editor vim
-{{ end -}}
+{{- end }}
+
 {{ end -}}
 
 {{ if .enabled.fishFzf -}}
 # fzf.fish settings
 set fzf_fd_opts --hidden --exclude=.git
-{{ if .installed.eza -}}
+{{- if .installed.eza }}
 set fzf_preview_dir_cmd eza -la --group-directories-first --icons --no-permissions --no-user --no-filesize --no-time
-{{ end -}}
-{{ if .installed.delta -}}
+{{- end }}
+{{- if .installed.delta }}
 set fzf_diff_highlighter delta --paging=never --width=20
-{{ end -}}
+{{- end }}
 
 {{ end -}}
+
 {{ end -}}
 
