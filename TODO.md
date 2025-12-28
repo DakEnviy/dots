@@ -23,7 +23,7 @@
 - [x] Fix fish command highlighting
 - [x] Fix Ctrl+H in ranger and Ctrl+j,k in fzf for tmux session
 - [x] Add additional aliases in gitconfig
-- [ ] Check fifc additional tools
+- [x] Check fifc additional tools
 - [ ] Try to remove `user.functions` for fish
 - [ ] Fix new lines in all files
 - [ ] Rename installed to binaries and enabled to features
@@ -33,6 +33,7 @@
 - [ ] Implement choosing apps to install configs
 - [ ] Implement auto installing chosen apps for Ubuntu
 - [ ] Implement auto installing chosen apps for Homebrew
+- [ ] Check yazi
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
 - [ ] Add pnpm
