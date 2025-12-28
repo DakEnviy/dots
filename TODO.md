@@ -31,6 +31,9 @@
 - [ ] Update starship config and double-check arc there
 - [ ] Split init for local and remote machines
 - [ ] Import public ssh keys to a remote machine
+- [ ] Implement choosing apps to install configs
+- [ ] Implement auto installing chosen apps for Ubuntu
+- [ ] Implement auto installing chosen apps for Homebrew
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
 - [ ] Add pnpm
