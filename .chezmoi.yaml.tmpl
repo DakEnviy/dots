@@ -50,12 +50,11 @@ Other useful apps:
 {{-   $_ := set $installed . (findExecutable . $path) -}}
 {{- end -}}
 
-{{- $gpgInitEnabled := all $installed.gpg $installed.bw -}}
-{{- $gpgSearchTerm := "" -}}
-{{- $prevGpgSearchTerm := dig "gpg" "searchTerm" "gpg" . -}}
+{{- $gpgSearchTerm := dig "gpg" "searchTerm" "gpg" . -}}
 {{- $gpgMainKeyId := dig "gpg" "mainKeyId" "" . -}}
-{{- if $gpgInitEnabled -}}
-{{-   $gpgSearchTerm = promptStringOnce . "gpg.searchTerm" "Search term or ID for GPG key in Bitwarden" $prevGpgSearchTerm -}}
+{{- if and $installed.gpg $installed.bw -}}
+{{-   $prevGpgSearchTerm := $gpgSearchTerm -}}
+{{-   $gpgSearchTerm = promptStringOnce . "gpg.searchTerm" "Search term or ID for GPG key in Bitwarden" $gpgSearchTerm -}}
 {{-   $refreshGpg := or (not $gpgMainKeyId) (ne $gpgSearchTerm $prevGpgSearchTerm) (promptBoolOnce . "gpg.refresh" "Refresh GPG key" false) -}}
 {{-   if $refreshGpg -}}
 {{-     $gpgKey := (bitwarden "item" $gpgSearchTerm).notes -}}
@@ -69,13 +68,10 @@ data:
     {{- toYaml $installed | trim | nindent 4 }}
   enabled:
     fishFzf: {{ all $installed.fish $installed.fzf $installed.fd $installed.bat }}
-    gpgInit: {{ $gpgInitEnabled }}
-  {{- if $gpgInitEnabled }}
   gpg:
     searchTerm: {{ $gpgSearchTerm | quote }}
     mainKeyId: {{ $gpgMainKeyId | quote }}
     refresh: false
-  {{- end }}
   {{- if $installed.git }}
   git:
     name: {{ promptStringOnce . "git.name" "Name for git" (dig "git" "name" "" .) | quote }}

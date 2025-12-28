@@ -2,11 +2,11 @@
 [user]
     name = {{ .git.name }}
     email = {{ .git.email }}
-    {{- if .enabled.gpgInit }}
-    signingkey = {{ .gpg.mainKeyId }}
+    {{- with .gpg.mainKeyId }}
+    signingkey = {{ . }}
     {{- end }}
 
-{{ if .enabled.gpgInit -}}
+{{ if .gpg.mainKeyId -}}
 [commit]
     gpgsign = true
 
