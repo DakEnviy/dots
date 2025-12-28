@@ -18,6 +18,9 @@
 [init]
     defaultBranch = main
 
+[rebase]
+    autoSquash = true
+
 [core]
     autocrlf = input
     {{- if .installed.vim }}
@@ -49,6 +52,9 @@
     ci = commit
     co = checkout
     br = branch
+    edit = commit --amend
+    amend = commit --all --amend --no-edit
+    unstage = reset HEAD --
     m = !git checkout $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///')
     prm = !git pull -r origin $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///')
     new = !git checkout $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///') && git pull && git checkout -b

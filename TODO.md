@@ -22,8 +22,7 @@
   - [x] Add signingkey to the config
 - [x] Fix fish command highlighting
 - [x] Fix Ctrl+H in ranger and Ctrl+j,k in fzf for tmux session
-- [ ] Highlight TODO in vim
-- [ ] Add additional aliases in gitconfig
+- [x] Add additional aliases in gitconfig
 - [ ] Check fifc additional tools
 - [ ] Try to remove `user.functions` for fish
 - [ ] Fix new lines in all files
@@ -38,6 +37,7 @@
 - [ ] Add jumoreski
 - [ ] Add pnpm
 - [ ] Try to make nvm and npm.fish optional
+- [ ] Highlight TODO in vim
 
 **Apps**
 
