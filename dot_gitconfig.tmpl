@@ -1,0 +1,62 @@
+{{ if .installed.git -}}
+[user]
+    name = {{ .git.name }}
+    email = {{ .git.email }}
+    {{- if .enabled.gpgInit }}
+    signingkey = {{ .gpg.mainKeyId }}
+    {{- end }}
+
+{{ if .enabled.gpgInit -}}
+[commit]
+    gpgsign = true
+
+[tag]
+    gpgsign = true
+
+{{ end -}}
+
+[init]
+    defaultBranch = main
+
+[core]
+    autocrlf = input
+    {{- if .installed.vim }}
+    editor = vim
+    {{- end }}
+    {{- if .installed.delta }}
+    pager = delta
+    {{- end }}
+
+{{ if .installed.delta -}}
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    light = false
+    line-numbers = true
+
+{{ end -}}
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    m = !git checkout $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///')
+    prm = !git pull -r origin $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///')
+    new = !git checkout $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///') && git pull && git checkout -b
+    wip = !git add . && git commit -m 'wip' -n
+    unwip = !git reset --soft HEAD^ && git reset HEAD .
+
+[include]
+    path = ~/.gitconfig-extension
+
+{{ end -}}
+

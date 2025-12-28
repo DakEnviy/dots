@@ -10,6 +10,7 @@
       "fd"
       "fish"
       "fzf"
+      "git"
       "go"
       "gpg"
       "jq"
@@ -40,19 +41,32 @@
 {{-   $_ := set $installed . (findExecutable . $path) -}}
 {{- end -}}
 
-{{- $gpgSearchTerm := promptString "Search term or ID for GPG key in Bitwarden" "gpg" -}}
-{{- $gpgKey := (bitwarden "item" $gpgSearchTerm).notes -}}
-{{- $gpgPackets := output "sh" "-c" (printf "printf -- %s | gpg --list-packets" ($gpgKey | quote)) -}}
-{{- $gpgMainKeyId := $gpgPackets | regexFind "keyid: [0-9A-F]{16}" | substr 7 23 -}}
+{{- $gpgInitEnabled := all $installed.gpg $installed.bw -}}
+{{- $gpgSearchTerm := "" -}}
+{{- $gpgMainKeyId := "" -}}
+{{- if $gpgInitEnabled -}}
+{{-   $gpgSearchTerm = promptString "Search term or ID for GPG key in Bitwarden" "gpg" -}}
+{{-   $gpgKey := (bitwarden "item" $gpgSearchTerm).notes -}}
+{{-   $gpgPackets := output "sh" "-c" (printf "printf -- %s | gpg --list-packets" ($gpgKey | quote)) -}}
+{{-   $gpgMainKeyId = $gpgPackets | regexFind "keyid: [0-9A-F]{16}" | substr 7 23 -}}
+{{- end -}}
 
 data:
   installed:
     {{- toYaml $installed | trim | nindent 4 }}
   enabled:
     fishFzf: {{ all $installed.fish $installed.fzf $installed.fd $installed.bat }}
+    gpgInit: {{ $gpgInitEnabled }}
+  {{- if $gpgInitEnabled }}
   gpg:
     searchTerm: {{ $gpgSearchTerm | quote }}
     mainKeyId: {{ $gpgMainKeyId | quote }}
+  {{- end }}
+  {{- if $installed.git }}
+  git:
+    name: {{ promptString "Name for git" | quote }}
+    email: {{ promptString "Email for git" | quote }}
+  {{- end }}
 
 {{ if $installed.bw -}}
 bitwarden:

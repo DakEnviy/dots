@@ -16,16 +16,16 @@
   - [x] Add removing other gpg keys
   - [x] Add gpg config and commands
   - [x] Parametrize gpg search term
-- [ ] Add git
-  - [ ] Add simple config
-  - [ ] Prompt name and email
-  - [ ] Add signingkey to the config
+- [x] Add git
+  - [x] Add simple config
+  - [x] Prompt name and email
+  - [x] Add signingkey to the config
 - [ ] Fix fish command highlighting
 - [ ] Fix Ctrl+H in ranger and Ctrl+j,k in fzf for tmux session
 - [ ] Highlight TODO in vim
+- [ ] Add additional aliases in gitconfig
 - [ ] Check fifc additional tools
 - [ ] Fix new lines in all files
-- [ ] Add additional aliases in gitconfig
 - [ ] Rename installed to binaries and enabled to features
 - [ ] Update starship config and double-check arc there
 - [ ] Split init for local and remote machines
@@ -54,7 +54,7 @@
 - [x] go:fish
 - [x] kubectl:fish
 - [x] yc:fish
-- [ ] git
+- [x] git
 - [ ] ssh-agent
 - [x] starship
 - [x] starship:fish
