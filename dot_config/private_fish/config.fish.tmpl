@@ -28,7 +28,7 @@ set fifc_editor vim
 
 {{ end -}}
 
-{{ if .enabled.fishFzf -}}
+{{ if .features.fishFzf -}}
 # fzf.fish settings
 set fzf_fd_opts --hidden --exclude=.git
 {{- if .binaries.eza }}

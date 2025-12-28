@@ -26,7 +26,7 @@
 - [x] Check fifc additional tools
 - [x] Try to remove `user.functions` for fish
 - [x] Fix new lines in all files
-- [ ] Rename installed to binaries and enabled to features
+- [x] Rename installed to binaries and enabled to features
 - [ ] Update starship config and double-check arc there
 - [ ] Split init for local and remote machines
 - [ ] Import public ssh keys to a remote machine

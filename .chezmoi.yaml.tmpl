@@ -72,7 +72,7 @@ Other useful apps:
 data:
   binaries:
     {{- toYaml $binaries | trim | nindent 4 }}
-  enabled:
+  features:
     fishFzf: {{ all $binaries.fish $binaries.fzf $binaries.fd $binaries.bat }}
   gpg:
     searchTerm: {{ $gpgSearchTerm | quote }}
