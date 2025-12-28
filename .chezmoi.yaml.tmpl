@@ -40,11 +40,25 @@
 {{-   $_ := set $installed . (findExecutable . $path) -}}
 {{- end -}}
 
+{{- $gpgSearchTerm := promptString "Search term or ID for GPG key in Bitwarden" "gpg" -}}
+{{- $gpgKey := (bitwarden "item" $gpgSearchTerm).notes -}}
+{{- $gpgPackets := output "sh" "-c" (printf "printf -- %s | gpg --list-packets" ($gpgKey | quote)) -}}
+{{- $gpgMainKeyId := $gpgPackets | regexFind "keyid: [0-9A-F]{16}" | substr 7 23 -}}
+
 data:
   installed:
     {{- toYaml $installed | trim | nindent 4 }}
   enabled:
     fishFzf: {{ all $installed.fish $installed.fzf $installed.fd $installed.bat }}
+  gpg:
+    searchTerm: {{ $gpgSearchTerm | quote }}
+    mainKeyId: {{ $gpgMainKeyId | quote }}
+
+{{ if $installed.bw -}}
+bitwarden:
+  unlock: true
+
+{{ end -}}
 
 {{ if $installed.delta -}}
 diff:

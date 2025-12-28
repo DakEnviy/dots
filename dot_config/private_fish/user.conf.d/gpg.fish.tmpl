@@ -3,8 +3,7 @@ set -gx GPG_TTY (tty)
 
 {{ if and .installed.bw .installed.jq .installed.fzf -}}
 function bw-gpg-import -d "Import gpg key from bitwarden"
-    # TODO: Make SEARCH_TERM variable
-    set SEARCH_TERM 'gpg'
+    set SEARCH_TERM {{ .gpg.searchTerm | quote }}
 
     if test -z "$BW_SESSION"
         set -x BW_SESSION (bw unlock --raw)
@@ -26,7 +25,7 @@ function bw-gpg-import -d "Import gpg key from bitwarden"
 end
 
 function bw-gpg-choose -d "Choose subkey and delete others"
-    set SEARCH_TERM 'gpg'
+    set SEARCH_TERM {{ .gpg.searchTerm | quote }}
 
     if test -z "$BW_SESSION"
         set -x BW_SESSION (bw unlock --raw)
