@@ -55,12 +55,18 @@ Other useful apps:
 {{- if and $installed.gpg $installed.bw -}}
 {{-   $prevGpgSearchTerm := $gpgSearchTerm -}}
 {{-   $gpgSearchTerm = promptStringOnce . "gpg.searchTerm" "Search term or ID for GPG key in Bitwarden" $gpgSearchTerm -}}
-{{-   $refreshGpg := or (not $gpgMainKeyId) (ne $gpgSearchTerm $prevGpgSearchTerm) (promptBoolOnce . "gpg.refresh" "Refresh GPG key" false) -}}
-{{-   if $refreshGpg -}}
+{{-   if or (not $gpgMainKeyId) (ne $gpgSearchTerm $prevGpgSearchTerm) (promptBoolOnce . "gpg.refresh" "Refresh GPG key" false) -}}
 {{-     $gpgKey := (bitwarden "item" $gpgSearchTerm).notes -}}
 {{-     $gpgPackets := output "sh" "-c" (printf "printf -- %s | gpg --list-packets" ($gpgKey | quote)) -}}
 {{-     $gpgMainKeyId = $gpgPackets | regexFind "keyid: [0-9A-F]{16}" | substr 7 23 -}}
 {{-   end -}}
+{{- end -}}
+
+{{- $gitName := dig "git" "name" "" . -}}
+{{- $gitEmail := dig "git" "email" "" . -}}
+{{- if $installed.git -}}
+{{-   $gitName = promptStringOnce . "git.name" "Name for git" $gitName -}}
+{{-   $gitEmail = promptStringOnce . "git.email" "Email for git" $gitEmail -}}
 {{- end -}}
 
 data:
@@ -72,11 +78,9 @@ data:
     searchTerm: {{ $gpgSearchTerm | quote }}
     mainKeyId: {{ $gpgMainKeyId | quote }}
     refresh: false
-  {{- if $installed.git }}
   git:
-    name: {{ promptStringOnce . "git.name" "Name for git" (dig "git" "name" "" .) | quote }}
-    email: {{ promptStringOnce . "git.email" "Email for git" (dig "git" "email" "" .) | quote }}
-  {{- end }}
+    name: {{ $gitName | quote }}
+    email: {{ $gitEmail | quote }}
 
 {{ if $installed.bw -}}
 bitwarden:
