@@ -24,7 +24,7 @@
 - [x] Fix Ctrl+H in ranger and Ctrl+j,k in fzf for tmux session
 - [x] Add additional aliases in gitconfig
 - [x] Check fifc additional tools
-- [ ] Try to remove `user.functions` for fish
+- [x] Try to remove `user.functions` for fish
 - [ ] Fix new lines in all files
 - [ ] Rename installed to binaries and enabled to features
 - [ ] Update starship config and double-check arc there
