@@ -25,6 +25,7 @@
 - [ ] Highlight TODO in vim
 - [ ] Add additional aliases in gitconfig
 - [ ] Check fifc additional tools
+- [ ] Try to remove `user.functions` for fish
 - [ ] Fix new lines in all files
 - [ ] Rename installed to binaries and enabled to features
 - [ ] Update starship config and double-check arc there
