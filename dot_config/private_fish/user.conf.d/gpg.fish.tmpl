@@ -21,7 +21,21 @@ function bw-gpg-import -d "Import gpg key from bitwarden"
         return 1
     end
 
+    set main_key_id (echo "$note" | gpg --list-packets 2>/dev/null | awk '$1=="keyid:"{print $2; exit}')
+    if test -z "$main_key_id"
+        echo "GPG key is not found in the note" >&2
+        return 1
+    end
+
     echo "$note" | gpg --import
+    if test $status -ne 0
+        return $status
+    end
+
+    set local_data (gpg --list-keys --with-colons "$main_key_id" 2>/dev/null | string collect)
+    set main_key_fpr (echo "$local_data" | awk -F ':' "/^fpr:.*$main_key_id:\$/{print \$10}")
+
+    echo "$main_key_fpr:6:" | gpg --import-ownertrust
 end
 
 function bw-gpg-choose -d "Choose subkey and delete others"
