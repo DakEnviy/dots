@@ -27,7 +27,7 @@
 - [x] Try to remove `user.functions` for fish
 - [x] Fix new lines in all files
 - [x] Rename installed to binaries and enabled to features
-- [ ] Split init for local and remote machines
+- [x] Split init for local and remote machines
 - [ ] Import public ssh keys to a remote machine
 - [ ] Implement choosing apps to install configs
 - [ ] Implement auto installing chosen apps for Ubuntu

@@ -50,9 +50,11 @@ Other useful apps:
 {{-   $_ := set $binaries . (findExecutable . $path) -}}
 {{- end -}}
 
+{{- $hostType := promptChoiceOnce . "hostType" "What type of host are you on" (list "desktop" "server") "desktop" -}}
+
 {{- $gpgSearchTerm := dig "gpg" "searchTerm" "gpg" . -}}
 {{- $gpgMainKeyId := dig "gpg" "mainKeyId" "" . -}}
-{{- if and $binaries.gpg $binaries.bw -}}
+{{- if and $binaries.gpg $binaries.bw (eq $hostType "desktop") -}}
 {{-   $prevGpgSearchTerm := $gpgSearchTerm -}}
 {{-   $gpgSearchTerm = promptStringOnce . "gpg.searchTerm" "Search term or ID for GPG key in Bitwarden" $gpgSearchTerm -}}
 {{-   if or (not $gpgMainKeyId) (ne $gpgSearchTerm $prevGpgSearchTerm) (promptBoolOnce . "gpg.refresh" "Refresh GPG key" false) -}}
@@ -74,6 +76,7 @@ data:
     {{- toYaml $binaries | trim | nindent 4 }}
   features:
     fishFzf: {{ all $binaries.fish $binaries.fzf $binaries.fd $binaries.bat }}
+  hostType: {{ $hostType | quote }}
   gpg:
     searchTerm: {{ $gpgSearchTerm | quote }}
     mainKeyId: {{ $gpgMainKeyId | quote }}
