@@ -198,8 +198,6 @@ data:
     {{- toYaml $configure | trim | nindent 4 }}
   configureList:
     {{- toYaml $configureList | trim | nindent 4 }}
-  features:
-    fishFzf: {{ all $configure.fish $configure.fzf $binaries.fish $binaries.fzf $binaries.fd $binaries.bat }}
   hostType: {{ $hostType | quote }}
   ssh:
     keysUrl: {{ $sshKeysUrl | quote }}

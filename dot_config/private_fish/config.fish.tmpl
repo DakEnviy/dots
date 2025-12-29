@@ -21,7 +21,7 @@ set fifc_bat_opts --style=numbers --color=always
 set fifc_editor vim
 {{- end }}
 
-{{ if .features.fishFzf -}}
+{{ if and .configure.fzf .binaries.fzf .binaries.fd .binaries.bat -}}
 # fzf.fish settings
 set fzf_fd_opts --hidden --exclude=.git
 {{- if and .configure.eza .binaries.eza }}

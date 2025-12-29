@@ -30,6 +30,7 @@
 - [x] Split init for local and remote machines
 - [x] Populate public ssh keys to a remote machine
 - [x] Implement choosing apps to install configs
+- [ ] Do not allow choose apps which is not used for configuration
 - [ ] Implement auto installing chosen apps for Ubuntu
 - [ ] Implement auto installing chosen apps for Homebrew
 - [ ] Update starship config and double-check arc there

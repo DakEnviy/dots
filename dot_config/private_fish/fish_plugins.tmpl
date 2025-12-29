@@ -3,7 +3,7 @@ jorgebucaran/fisher
 hastinbe/theme-kawasaki
 jethrokuan/z
 gazorby/fifc
-{{- if .features.fishFzf }}
+{{- if and .configure.fzf .binaries.fzf .binaries.fd .binaries.bat }}
 patrickf1/fzf.fish
 {{- end }}
 jorgebucaran/nvm.fish
