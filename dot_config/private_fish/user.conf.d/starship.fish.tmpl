@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.starship -}}
+{{ if and .configure.fish .configure.starship .binaries.starship -}}
 if status is-interactive
     starship init fish | source
 end

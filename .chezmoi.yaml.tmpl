@@ -8,31 +8,110 @@ Other useful apps:
 - yq
 */ -}}
 {{- $apps := list
-      "aws"
-      "bat"
-      "brew"
-      "bw"
-      "cargo"
-      "chezmoi"
-      "delta"
-      "eza"
-      "fd"
-      "fish"
-      "fzf"
-      "git"
-      "go"
-      "gpg"
-      "jq"
-      "kitty"
-      "kubectl"
-      "podman"
-      "python3"
-      "ranger"
-      "rg"
-      "starship"
-      "tmux"
-      "vim"
-      "yc"
+      (dict
+        "name" "aws-cli"
+        "desc" "Universal Command Line Interface for Amazon Web Services"
+        "exec" "aws")
+      (dict
+        "name" "bat"
+        "desc" "A cat(1) clone with wings"
+        "exec" "bat")
+      (dict
+        "name" "bitwarden-cli"
+        "desc" "Bitwarden client"
+        "exec" "bw")
+      (dict
+        "name" "cargo"
+        "desc" "The Rust package manager"
+        "exec" "cargo")
+      (dict
+        "name" "chezmoi"
+        "desc" "Manage your dotfiles across multiple diverse machines, securely"
+        "exec" "chezmoi")
+      (dict
+        "name" "curl"
+        "desc" "A command line tool and library for transferring data with URL syntax"
+        "exec" "curl")
+      (dict
+        "name" "eza"
+        "desc" "A modern alternative to ls"
+        "exec" "eza")
+      (dict
+        "name" "fd-find"
+        "desc" "A simple, fast and user-friendly alternative to 'find'"
+        "exec" "fd")
+      (dict
+        "name" "fish-shell"
+        "desc" "The user-friendly command line shell"
+        "exec" "fish")
+      (dict
+        "name" "fzf"
+        "desc" "A command-line fuzzy finder"
+        "exec" "fzf")
+      (dict
+        "name" "git"
+        "desc" "A version control system"
+        "exec" "git")
+      (dict
+        "name" "git-delta"
+        "desc" "A syntax-highlighting pager for git, diff, grep, and blame output"
+        "exec" "delta")
+      (dict
+        "name" "go"
+        "desc" "The Go programming language"
+        "exec" "go")
+      (dict
+        "name" "gpg"
+        "desc" "The GNU Privacy Guard"
+        "exec" "gpg")
+      (dict
+        "name" "homebrew"
+        "desc" "The missing package manager for macOS (or Linux)"
+        "exec" "brew")
+      (dict
+        "name" "jq"
+        "desc" "Command-line JSON processor"
+        "exec" "jq")
+      (dict
+        "name" "kitty"
+        "desc" "Cross-platform, fast, feature-rich, GPU based terminal"
+        "exec" "kitty")
+      (dict
+        "name" "kubectl"
+        "desc" "Production-Grade Container Scheduling and Management"
+        "exec" "kubectl")
+      (dict
+        "name" "podman"
+        "desc" "A tool for managing OCI containers and pods"
+        "exec" "podman")
+      (dict
+        "name" "python3"
+        "desc" "The Python programming language"
+        "exec" "python3")
+      (dict
+        "name" "ranger"
+        "desc" "A VIM-inspired filemanager for the console"
+        "exec" "ranger")
+      (dict
+        "name" "ripgrep"
+        "desc" "A line-oriented search tool that recursively searches the current directory for a regex pattern"
+        "exec" "rg")
+      (dict
+        "name" "starship"
+        "desc" "The minimal, blazing-fast, and infinitely customizable prompt for any shell"
+        "exec" "starship")
+      (dict
+        "name" "tmux"
+        "desc" "A terminal multiplexer"
+        "exec" "tmux")
+      (dict
+        "name" "vim"
+        "desc" "A lovely text editor"
+        "exec" "vim")
+      (dict
+        "name" "yc"
+        "desc" "Yandex Cloud CLI"
+        "exec" "yc")
 -}}
 
 {{- $homePath := list
@@ -47,7 +126,35 @@ Other useful apps:
 
 {{- $binaries := dict -}}
 {{- range $apps -}}
-{{-   $_ := set $binaries . (findExecutable . $path) -}}
+{{-   $_ := set $binaries .exec (findExecutable .exec $path) -}}
+{{- end -}}
+
+{{- $nameMaxLen := 0 -}}
+{{- range $apps -}}
+{{-   if gt (len .name) $nameMaxLen -}}
+{{-     $nameMaxLen = len .name -}}
+{{-   end -}}
+{{- end -}}
+{{- $displayNames := dict -}}
+{{- range $apps -}}
+{{-   $_ := set $displayNames .exec (printf "%-*s | %s" $nameMaxLen .name .desc) -}}
+{{- end -}}
+
+{{- $configure := dig "configure" dict . -}}
+{{- if empty $configure -}}
+{{-   range $apps -}}
+{{-     $_ := set $configure .exec (all (get $binaries .exec)) -}}
+{{-   end -}}
+{{- end -}}
+{{- $configureList := list -}}
+{{- range $exec, $configured := $configure -}}
+{{-   if $configured -}}
+{{-     $configureList = append $configureList (get $displayNames $exec) -}}
+{{-   end -}}
+{{- end -}}
+{{- $configureList = promptMultichoiceOnce . "configureList" "Which apps need to be configured" (values $displayNames | sortAlpha) $configureList -}}
+{{- range $apps -}}
+{{-   $_ := set $configure .exec (has (get $displayNames .exec) $configureList) -}}
 {{- end -}}
 
 {{- $hostType := promptChoiceOnce . "hostType" "What type of host are you on" (list "desktop" "server") (dig "hostType" "desktop" .) -}}
@@ -61,7 +168,7 @@ Other useful apps:
 
 {{- $gpgSearchTerm := dig "gpg" "searchTerm" "gpg" . -}}
 {{- $gpgMainKeyId := dig "gpg" "mainKeyId" "" . -}}
-{{- if and $binaries.gpg $binaries.bw (eq $hostType "desktop") -}}
+{{- if and $configure.gpg $binaries.gpg $binaries.bw (eq $hostType "desktop") -}}
 {{-   $prevGpgSearchTerm := $gpgSearchTerm -}}
 {{-   $gpgSearchTerm = promptStringOnce . "gpg.searchTerm" "What is the search term or ID for GPG key in Bitwarden" $gpgSearchTerm -}}
 {{-   if or (not $gpgMainKeyId) (ne $gpgSearchTerm $prevGpgSearchTerm) (promptBoolOnce . "gpg.refresh" "Do you need to refresh GPG key" false) -}}
@@ -76,16 +183,23 @@ Other useful apps:
 
 {{- $gitName := dig "git" "name" "" . -}}
 {{- $gitEmail := dig "git" "email" "" . -}}
-{{- if $binaries.git -}}
+{{- if $configure.git -}}
 {{-   $gitName = promptStringOnce . "git.name" "What is your name for git" $gitName -}}
 {{-   $gitEmail = promptStringOnce . "git.email" "What is your email for git" $gitEmail -}}
+{{- else -}}
+{{-   $gitName = "" -}}
+{{-   $gitEmail = "" -}}
 {{- end -}}
 
 data:
   binaries:
     {{- toYaml $binaries | trim | nindent 4 }}
+  configure:
+    {{- toYaml $configure | trim | nindent 4 }}
+  configureList:
+    {{- toYaml $configureList | trim | nindent 4 }}
   features:
-    fishFzf: {{ all $binaries.fish $binaries.fzf $binaries.fd $binaries.bat }}
+    fishFzf: {{ all $configure.fish $configure.fzf $binaries.fish $binaries.fzf $binaries.fd $binaries.bat }}
   hostType: {{ $hostType | quote }}
   ssh:
     keysUrl: {{ $sshKeysUrl | quote }}
@@ -97,13 +211,10 @@ data:
     name: {{ $gitName | quote }}
     email: {{ $gitEmail | quote }}
 
-{{ if $binaries.bw -}}
 bitwarden:
   unlock: true
 
-{{ end -}}
-
-{{ if $binaries.delta -}}
+{{ if and $configure.delta $binaries.delta -}}
 diff:
   pager: delta
 

@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.tmux -}}
+{{ if and .configure.fish .configure.tmux .binaries.tmux -}}
 alias tn 'tmux new-session -s "$fish_pid"'
 
 if status is-interactive

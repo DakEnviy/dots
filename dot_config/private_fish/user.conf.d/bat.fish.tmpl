@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.bat -}}
+{{ if and .configure.fish .configure.bat .binaries.bat -}}
 set -gx BAT_THEME 'TwoDark'
 set -gx MANPAGER "sh -c 'col -bx | bat -p -l man'"
 

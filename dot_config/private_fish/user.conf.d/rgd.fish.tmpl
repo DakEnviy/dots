@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.rg .binaries.delta -}}
+{{ if and .configure.fish .configure.rg .configure.delta .binaries.rg .binaries.delta -}}
 function rgd
     rg --json -C 2 $argv | delta
 end

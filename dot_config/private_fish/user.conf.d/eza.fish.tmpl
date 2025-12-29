@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.eza -}}
+{{ if and .configure.fish .configure.eza .binaries.eza -}}
 function ll
     eza -lg --group-directories-first --icons --octal-permissions $argv
 end

@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.chezmoi -}}
+{{ if and .configure.fish .configure.chezmoi .binaries.chezmoi -}}
 alias ch 'chezmoi'
 
 {{ end -}}

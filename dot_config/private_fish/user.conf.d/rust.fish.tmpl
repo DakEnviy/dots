@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.cargo -}}
+{{ if and .configure.fish .configure.cargo -}}
 set -gx CARGOPATH "$HOME/.cargo"
 set -gx PATH "$CARGOPATH/bin:$PATH"
 

@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.brew -}}
+{{ if and .configure.fish .configure.brew .binaries.brew -}}
 eval ({{ .binaries.brew }} shellenv)
 
 {{ end -}}

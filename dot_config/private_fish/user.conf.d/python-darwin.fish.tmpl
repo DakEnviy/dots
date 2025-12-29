@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.python3 (eq .chezmoi.os "darwin") -}}
+{{ if and .configure.fish .configure.python3 .binaries.python3 (eq .chezmoi.os "darwin") -}}
 set -gx PYTHON_USER_BASE (python3 -c 'import site; print(site.USER_BASE, end="")')
 set -gx PATH "$PYTHON_USER_BASE/bin:$PATH"
 

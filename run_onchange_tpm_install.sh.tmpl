@@ -1,4 +1,4 @@
-{{ if .binaries.tmux -}}
+{{ if and .configure.tmux .binaries.tmux -}}
 #!/usr/bin/env bash
 
 # hash: {{ includeTemplate "dot_tmux.conf.tmpl" . | sha256sum }}

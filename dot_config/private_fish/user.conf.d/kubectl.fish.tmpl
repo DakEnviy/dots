@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.kubectl -}}
+{{ if and .configure.fish .configure.kubectl .binaries.kubectl -}}
 alias k 'kubectl'
 
 {{ end -}}

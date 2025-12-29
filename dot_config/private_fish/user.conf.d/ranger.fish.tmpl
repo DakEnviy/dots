@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.ranger -}}
+{{ if and .configure.fish .configure.ranger .binaries.ranger -}}
 alias ranger 'ranger --choosedir="$HOME/.rangerdir"; set LASTDIR (cat "$HOME/.rangerdir"); cd "$LASTDIR"'
 
 {{ end -}}

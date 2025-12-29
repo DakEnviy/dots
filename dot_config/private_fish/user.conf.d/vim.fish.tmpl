@@ -1,4 +1,4 @@
-{{ if and .binaries.fish .binaries.vim -}}
+{{ if and .configure.fish .configure.vim .binaries.vim -}}
 set -gx EDITOR 'vim'
 
 {{ end -}}

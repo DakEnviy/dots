@@ -1,4 +1,4 @@
-{{ if .binaries.fish -}}
+{{ if and .configure.fish .binaries.fish .binaries.curl -}}
 #!/usr/bin/env bash
 
 # hash: {{ includeTemplate "dot_config/private_fish/fish_plugins.tmpl" . | sha256sum }}
