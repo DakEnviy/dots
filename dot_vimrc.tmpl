@@ -8,6 +8,7 @@ Plug 'tribela/vim-transparent'
 " Features
 Plug 'easymotion/vim-easymotion'
 Plug 'jasonccox/vim-wayland-clipboard'
+Plug 'junegunn/vim-easy-align'
 
 " Syntax
 Plug 'dag/vim-fish'
@@ -60,6 +61,10 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>w <Plug>(easymotion-wl)
 map <Leader>e <Plug>(easymotion-el)
 map <Leader>b <Plug>(easymotion-bl)
+
+" Easy Align configuration
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 {{ end -}}
 
