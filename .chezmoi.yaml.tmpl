@@ -161,7 +161,7 @@ Other useful apps:
 
 {{- $sshKeysUrl := dig "ssh" "keysUrl" "" . -}}
 {{- if eq $hostType "server" -}}
-{{-   $sshKeysUrl = promptStringOnce . "ssh.keysUrl" "Which URL use to fetch public SSH keys" $sshKeysUrl -}}
+{{-   $sshKeysUrl = promptStringOnce . "unsafe.sshKeysUrl" "Which URL use to fetch public SSH keys" $sshKeysUrl -}}
 {{- else -}}
 {{-   $sshKeysUrl = "" -}}
 {{- end -}}
@@ -177,15 +177,15 @@ Other useful apps:
 {{-     $gpgMainKeyId = $gpgPackets | regexFind "keyid: [0-9A-F]{16}" | substr 7 23 -}}
 {{-   end -}}
 {{- else -}}
-{{-   $gpgSearchTerm = "" -}}
+{{-   $gpgSearchTerm = "gpg" -}}
 {{-   $gpgMainKeyId = "" -}}
 {{- end -}}
 
 {{- $gitName := dig "git" "name" "" . -}}
 {{- $gitEmail := dig "git" "email" "" . -}}
 {{- if $configure.git -}}
-{{-   $gitName = promptStringOnce . "git.name" "What is your name for git" $gitName -}}
-{{-   $gitEmail = promptStringOnce . "git.email" "What is your email for git" $gitEmail -}}
+{{-   $gitName = promptStringOnce . "unsafe.gitName" "What is your name for git" $gitName -}}
+{{-   $gitEmail = promptStringOnce . "unsafe.gitEmail" "What is your email for git" $gitEmail -}}
 {{- else -}}
 {{-   $gitName = "" -}}
 {{-   $gitEmail = "" -}}
@@ -208,6 +208,18 @@ data:
   git:
     name: {{ $gitName | quote }}
     email: {{ $gitEmail | quote }}
+  {{- /* unsafe is used to prompt empty variables */}}
+  unsafe:
+    _: ""
+    {{- if $sshKeysUrl }}
+    sshKeysUrl: {{ $sshKeysUrl | quote }}
+    {{- end }}
+    {{- if $gitName }}
+    gitName: {{ $gitName | quote }}
+    {{- end }}
+    {{- if $gitEmail }}
+    gitEmail: {{ $gitEmail | quote }}
+    {{- end }}
 
 bitwarden:
   unlock: true
