@@ -55,6 +55,8 @@ Other useful apps:
 {{- $sshKeysUrl := dig "ssh" "keysUrl" "" . -}}
 {{- if eq $hostType "server" -}}
 {{-   $sshKeysUrl = promptStringOnce . "ssh.keysUrl" "Which URL use to fetch public SSH keys" $sshKeysUrl -}}
+{{- else -}}
+{{-   $sshKeysUrl = "" -}}
 {{- end -}}
 
 {{- $gpgSearchTerm := dig "gpg" "searchTerm" "gpg" . -}}
@@ -67,6 +69,9 @@ Other useful apps:
 {{-     $gpgPackets := output "sh" "-c" (printf "printf -- %s | gpg --list-packets" ($gpgKey | quote)) -}}
 {{-     $gpgMainKeyId = $gpgPackets | regexFind "keyid: [0-9A-F]{16}" | substr 7 23 -}}
 {{-   end -}}
+{{- else -}}
+{{-   $gpgSearchTerm = "" -}}
+{{-   $gpgMainKeyId = "" -}}
 {{- end -}}
 
 {{- $gitName := dig "git" "name" "" . -}}
