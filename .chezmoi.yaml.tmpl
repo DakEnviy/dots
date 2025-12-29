@@ -137,7 +137,7 @@ Other useful apps:
 {{- end -}}
 {{- $displayNames := dict -}}
 {{- range $apps -}}
-{{-   $_ := set $displayNames .exec (printf "%-*s | %s" $nameMaxLen .name .desc) -}}
+{{-   $_ := set $displayNames .exec (printf "%-*s | %s | %s" $nameMaxLen .name (all (get $binaries .exec) | ternary "yes" "   ") .desc) -}}
 {{- end -}}
 
 {{- $configure := dig "configure" dict . -}}
