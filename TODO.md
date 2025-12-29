@@ -28,7 +28,7 @@
 - [x] Fix new lines in all files
 - [x] Rename installed to binaries and enabled to features
 - [x] Split init for local and remote machines
-- [ ] Import public ssh keys to a remote machine
+- [x] Populate public ssh keys to a remote machine
 - [ ] Implement choosing apps to install configs
 - [ ] Implement auto installing chosen apps for Ubuntu
 - [ ] Implement auto installing chosen apps for Homebrew

@@ -50,14 +50,19 @@ Other useful apps:
 {{-   $_ := set $binaries . (findExecutable . $path) -}}
 {{- end -}}
 
-{{- $hostType := promptChoiceOnce . "hostType" "What type of host are you on" (list "desktop" "server") "desktop" -}}
+{{- $hostType := promptChoiceOnce . "hostType" "What type of host are you on" (list "desktop" "server") (dig "hostType" "desktop" .) -}}
+
+{{- $sshKeysUrl := dig "ssh" "keysUrl" "" . -}}
+{{- if eq $hostType "server" -}}
+{{-   $sshKeysUrl = promptStringOnce . "ssh.keysUrl" "Which URL use to fetch public SSH keys" $sshKeysUrl -}}
+{{- end -}}
 
 {{- $gpgSearchTerm := dig "gpg" "searchTerm" "gpg" . -}}
 {{- $gpgMainKeyId := dig "gpg" "mainKeyId" "" . -}}
 {{- if and $binaries.gpg $binaries.bw (eq $hostType "desktop") -}}
 {{-   $prevGpgSearchTerm := $gpgSearchTerm -}}
-{{-   $gpgSearchTerm = promptStringOnce . "gpg.searchTerm" "Search term or ID for GPG key in Bitwarden" $gpgSearchTerm -}}
-{{-   if or (not $gpgMainKeyId) (ne $gpgSearchTerm $prevGpgSearchTerm) (promptBoolOnce . "gpg.refresh" "Refresh GPG key" false) -}}
+{{-   $gpgSearchTerm = promptStringOnce . "gpg.searchTerm" "What is the search term or ID for GPG key in Bitwarden" $gpgSearchTerm -}}
+{{-   if or (not $gpgMainKeyId) (ne $gpgSearchTerm $prevGpgSearchTerm) (promptBoolOnce . "gpg.refresh" "Do you need to refresh GPG key" false) -}}
 {{-     $gpgKey := (bitwarden "item" $gpgSearchTerm).notes -}}
 {{-     $gpgPackets := output "sh" "-c" (printf "printf -- %s | gpg --list-packets" ($gpgKey | quote)) -}}
 {{-     $gpgMainKeyId = $gpgPackets | regexFind "keyid: [0-9A-F]{16}" | substr 7 23 -}}
@@ -67,8 +72,8 @@ Other useful apps:
 {{- $gitName := dig "git" "name" "" . -}}
 {{- $gitEmail := dig "git" "email" "" . -}}
 {{- if $binaries.git -}}
-{{-   $gitName = promptStringOnce . "git.name" "Name for git" $gitName -}}
-{{-   $gitEmail = promptStringOnce . "git.email" "Email for git" $gitEmail -}}
+{{-   $gitName = promptStringOnce . "git.name" "What is your name for git" $gitName -}}
+{{-   $gitEmail = promptStringOnce . "git.email" "What is your email for git" $gitEmail -}}
 {{- end -}}
 
 data:
@@ -77,6 +82,8 @@ data:
   features:
     fishFzf: {{ all $binaries.fish $binaries.fzf $binaries.fd $binaries.bat }}
   hostType: {{ $hostType | quote }}
+  ssh:
+    keysUrl: {{ $sshKeysUrl | quote }}
   gpg:
     searchTerm: {{ $gpgSearchTerm | quote }}
     mainKeyId: {{ $gpgMainKeyId | quote }}
