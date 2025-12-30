@@ -11,107 +11,133 @@ Other useful apps:
       (dict
         "name" "aws-cli"
         "desc" "Universal Command Line Interface for Amazon Web Services"
-        "exec" "aws")
+        "exec" "aws"
+        "conf" false)
       (dict
         "name" "bat"
         "desc" "A cat(1) clone with wings"
-        "exec" "bat")
+        "exec" "bat"
+        "conf" true)
       (dict
         "name" "bitwarden-cli"
         "desc" "Bitwarden client"
-        "exec" "bw")
+        "exec" "bw"
+        "conf" false)
       (dict
         "name" "cargo"
         "desc" "The Rust package manager"
-        "exec" "cargo")
+        "exec" "cargo"
+        "conf" true)
       (dict
         "name" "chezmoi"
         "desc" "Manage your dotfiles across multiple diverse machines, securely"
-        "exec" "chezmoi")
+        "exec" "chezmoi"
+        "conf" true)
       (dict
         "name" "curl"
         "desc" "A command line tool and library for transferring data with URL syntax"
-        "exec" "curl")
+        "exec" "curl"
+        "conf" false)
       (dict
         "name" "eza"
         "desc" "A modern alternative to ls"
-        "exec" "eza")
+        "exec" "eza"
+        "conf" true)
       (dict
         "name" "fd-find"
         "desc" "A simple, fast and user-friendly alternative to 'find'"
-        "exec" "fd")
+        "exec" "fd"
+        "conf" false)
       (dict
         "name" "fish-shell"
         "desc" "The user-friendly command line shell"
-        "exec" "fish")
+        "exec" "fish"
+        "conf" true)
       (dict
         "name" "fzf"
         "desc" "A command-line fuzzy finder"
-        "exec" "fzf")
+        "exec" "fzf"
+        "conf" true)
       (dict
         "name" "git"
         "desc" "A version control system"
-        "exec" "git")
+        "exec" "git"
+        "conf" true)
       (dict
         "name" "git-delta"
         "desc" "A syntax-highlighting pager for git, diff, grep, and blame output"
-        "exec" "delta")
+        "exec" "delta"
+        "conf" true)
       (dict
         "name" "go"
         "desc" "The Go programming language"
-        "exec" "go")
+        "exec" "go"
+        "conf" true)
       (dict
         "name" "gpg"
         "desc" "The GNU Privacy Guard"
-        "exec" "gpg")
+        "exec" "gpg"
+        "conf" true)
       (dict
         "name" "homebrew"
         "desc" "The missing package manager for macOS (or Linux)"
-        "exec" "brew")
+        "exec" "brew"
+        "conf" true)
       (dict
         "name" "jq"
         "desc" "Command-line JSON processor"
-        "exec" "jq")
+        "exec" "jq"
+        "conf" false)
       (dict
         "name" "kitty"
         "desc" "Cross-platform, fast, feature-rich, GPU based terminal"
-        "exec" "kitty")
+        "exec" "kitty"
+        "conf" true)
       (dict
         "name" "kubectl"
         "desc" "Production-Grade Container Scheduling and Management"
-        "exec" "kubectl")
+        "exec" "kubectl"
+        "conf" true)
       (dict
         "name" "podman"
         "desc" "A tool for managing OCI containers and pods"
-        "exec" "podman")
+        "exec" "podman"
+        "conf" true)
       (dict
         "name" "python3"
         "desc" "The Python programming language"
-        "exec" "python3")
+        "exec" "python3"
+        "conf" true)
       (dict
         "name" "ranger"
         "desc" "A VIM-inspired filemanager for the console"
-        "exec" "ranger")
+        "exec" "ranger"
+        "conf" true)
       (dict
         "name" "ripgrep"
         "desc" "A line-oriented search tool that recursively searches the current directory for a regex pattern"
-        "exec" "rg")
+        "exec" "rg"
+        "conf" true)
       (dict
         "name" "starship"
         "desc" "The minimal, blazing-fast, and infinitely customizable prompt for any shell"
-        "exec" "starship")
+        "exec" "starship"
+        "conf" true)
       (dict
         "name" "tmux"
         "desc" "A terminal multiplexer"
-        "exec" "tmux")
+        "exec" "tmux"
+        "conf" true)
       (dict
         "name" "vim"
         "desc" "A lovely text editor"
-        "exec" "vim")
+        "exec" "vim"
+        "conf" true)
       (dict
         "name" "yc"
         "desc" "Yandex Cloud CLI"
-        "exec" "yc")
+        "exec" "yc"
+        "conf" true)
 -}}
 
 {{- $homePath := list
@@ -129,42 +155,55 @@ Other useful apps:
 {{-   $_ := set $binaries .exec (findExecutable .exec $path) -}}
 {{- end -}}
 
+{{- $configurable := dict -}}
+{{- range $apps -}}
+{{-   $_ := set $configurable .exec .conf -}}
+{{- end -}}
+
 {{- $nameMaxLen := 0 -}}
 {{- range $apps -}}
 {{-   if gt (len .name) $nameMaxLen -}}
 {{-     $nameMaxLen = len .name -}}
 {{-   end -}}
 {{- end -}}
-{{- $displayNames := dict -}}
-{{- range $apps -}}
-{{-   $_ := set $displayNames .exec (printf "%-*s | %s | %s" $nameMaxLen .name (all (get $binaries .exec) | ternary "yes" "   ") .desc) -}}
-{{- end -}}
 
+{{- $configureDisplayNames := dict -}}
+{{- range $apps -}}
+{{-   if .conf -}}
+{{-     $_ := set $configureDisplayNames .exec (printf "%-*s | %s | %s" $nameMaxLen .name (all (get $binaries .exec) | ternary "yes" "   ") .desc) -}}
+{{-   end -}}
+{{- end -}}
 {{- $configure := dig "configure" dict . -}}
 {{- $prevConfigure := deepCopy $configure -}}
-{{- if not (deepEqual $binaries (dig "binaries" dict .)) -}}
+{{- if not (and (deepEqual $binaries (dig "binaries" dict .)) (deepEqual $configurable (dig "configurable" dict .))) -}}
+{{-   $configure = dict -}}
 {{-   range $apps -}}
-{{-     $_ := set $configure .exec (any (get $configure .exec) (get $binaries .exec)) -}}
+{{-     if .conf -}}
+{{-       $_ := set $configure .exec (any (get $prevConfigure .exec) (get $binaries .exec)) -}}
+{{-     end -}}
 {{-   end -}}
 {{- end -}}
 {{- $configureList := list -}}
 {{- range $exec, $configured := $configure -}}
 {{-   if $configured -}}
-{{-     $configureList = append $configureList (get $displayNames $exec) -}}
+{{-     $configureList = append $configureList (get $configureDisplayNames $exec) -}}
 {{-   end -}}
 {{- end -}}
 {{- if deepEqual $configure $prevConfigure -}}
-{{-   $configureList = promptMultichoiceOnce . "configureList" "Which apps need to be configured" (values $displayNames | sortAlpha) $configureList -}}
+{{-   $configureList = promptMultichoiceOnce . "configureList" "Which apps need to be configured" (values $configureDisplayNames | sortAlpha) $configureList -}}
 {{- else -}}
-{{-   $configureList = promptMultichoice "Which apps need to be configured" (values $displayNames | sortAlpha) $configureList -}}
+{{-   $configureList = promptMultichoice "Which apps need to be configured" (values $configureDisplayNames | sortAlpha) $configureList -}}
 {{- end -}}
 {{- $normalizedConfigureList := list -}}
 {{- range $configureList -}}
 {{-   $normalizedConfigureList = append $normalizedConfigureList (regexReplaceAll "\\| (yes|   ) \\|" . "|") -}}
 {{- end -}}
 {{- $configureList = $normalizedConfigureList -}}
+{{- $configure = dict -}}
 {{- range $apps -}}
-{{-   $_ := set $configure .exec (has (regexReplaceAll "\\| (yes|   ) \\|" (get $displayNames .exec) "|") $configureList) -}}
+{{-   if .conf -}}
+{{-     $_ := set $configure .exec (has (regexReplaceAll "\\| (yes|   ) \\|" (get $configureDisplayNames .exec) "|") $configureList) -}}
+{{-   end -}}
 {{- end -}}
 
 {{- $hostType := promptChoiceOnce . "hostType" "What type of host are you on" (list "desktop" "server") (dig "hostType" "desktop" .) -}}
@@ -204,6 +243,8 @@ Other useful apps:
 data:
   binaries:
     {{- toYaml $binaries | trim | nindent 4 }}
+  configurable:
+    {{- toYaml $configurable | trim | nindent 4 }}
   configure:
     {{- toYaml $configure | trim | nindent 4 }}
   configureList:
