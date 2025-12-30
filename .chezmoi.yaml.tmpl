@@ -141,9 +141,10 @@ Other useful apps:
 {{- end -}}
 
 {{- $configure := dig "configure" dict . -}}
-{{- if empty $configure -}}
+{{- $prevConfigure := deepCopy $configure -}}
+{{- if not (deepEqual $binaries (dig "binaries" dict .)) -}}
 {{-   range $apps -}}
-{{-     $_ := set $configure .exec (all (get $binaries .exec)) -}}
+{{-     $_ := set $configure .exec (any (get $configure .exec) (get $binaries .exec)) -}}
 {{-   end -}}
 {{- end -}}
 {{- $configureList := list -}}
@@ -152,9 +153,18 @@ Other useful apps:
 {{-     $configureList = append $configureList (get $displayNames $exec) -}}
 {{-   end -}}
 {{- end -}}
-{{- $configureList = promptMultichoiceOnce . "configureList" "Which apps need to be configured" (values $displayNames | sortAlpha) $configureList -}}
+{{- if deepEqual $configure $prevConfigure -}}
+{{-   $configureList = promptMultichoiceOnce . "configureList" "Which apps need to be configured" (values $displayNames | sortAlpha) $configureList -}}
+{{- else -}}
+{{-   $configureList = promptMultichoice "Which apps need to be configured" (values $displayNames | sortAlpha) $configureList -}}
+{{- end -}}
+{{- $normalizedConfigureList := list -}}
+{{- range $configureList -}}
+{{-   $normalizedConfigureList = append $normalizedConfigureList (regexReplaceAll "\\| (yes|   ) \\|" . "|") -}}
+{{- end -}}
+{{- $configureList = $normalizedConfigureList -}}
 {{- range $apps -}}
-{{-   $_ := set $configure .exec (has (get $displayNames .exec) $configureList) -}}
+{{-   $_ := set $configure .exec (has (regexReplaceAll "\\| (yes|   ) \\|" (get $displayNames .exec) "|") $configureList) -}}
 {{- end -}}
 
 {{- $hostType := promptChoiceOnce . "hostType" "What type of host are you on" (list "desktop" "server") (dig "hostType" "desktop" .) -}}
