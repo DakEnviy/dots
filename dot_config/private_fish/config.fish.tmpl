@@ -14,12 +14,15 @@ set -g theme_display_time yes
 set -g theme_display_group no
 set -g theme_display_rw no
 
+{{ if and .configure.fzf .binaries.fzf -}}
 # fifc settings
 set fifc_fd_opts --hidden --exclude=.git
 set fifc_bat_opts --style=numbers --color=always
 {{- if and .configure.vim .binaries.vim }}
 set fifc_editor vim
 {{- end }}
+
+{{ end -}}
 
 {{ if and .configure.fzf .binaries.fzf .binaries.fd .binaries.bat -}}
 # fzf.fish settings
