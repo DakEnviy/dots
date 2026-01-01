@@ -5,14 +5,14 @@ for file in "$__fish_config_dir"/user.{conf.d,completions}/*.fish
 end
 
 # Theme settings
-set -U fish_prompt_pwd_dir_length 0
-set -U fish_color_command blue
-set -U fish_color_param dadada
-set -U fish_color_operator dadada --bold
-set -U fish_color_comment white
-set -U theme_display_time yes
-set -U theme_display_group no
-set -U theme_display_rw no
+set -g fish_prompt_pwd_dir_length 0
+set -g fish_color_command blue
+set -g fish_color_param dadada
+set -g fish_color_operator dadada --bold
+set -g fish_color_comment white
+set -g theme_display_time yes
+set -g theme_display_group no
+set -g theme_display_rw no
 
 # fifc settings
 set fifc_fd_opts --hidden --exclude=.git
