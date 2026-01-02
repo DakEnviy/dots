@@ -32,6 +32,13 @@ apps:
     install:
       apt: build-essential # This packages is needed for  compiling rust packages
       script: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+  - name: cargo-update
+    desc: The Rust package manager
+    exec: cargo-install-update
+    conf: false
+    install:
+      apt: libgit2-dev libcurl4-openssl-dev libssh-dev libssl-dev pkgconf # Dependencies
+      cargo: cargo-update
   - name: chezmoi
     desc: Manage your dotfiles across multiple diverse machines, securely
     exec: chezmoi
