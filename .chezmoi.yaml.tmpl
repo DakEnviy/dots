@@ -2,7 +2,7 @@
 
 {{- $installable := dict -}}
 {{- range $apps -}}
-{{-   $_ := set $installable .exec .inst -}}
+{{-   $_ := set $installable .exec (hasKey . "install") -}}
 {{- end -}}
 
 {{- $configurable := dict -}}

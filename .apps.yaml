@@ -9,136 +9,109 @@ apps:
   - name: aws-cli
     desc: Universal Command Line Interface for Amazon Web Services
     exec: aws
-    inst: false
     conf: false
   - name: bat
     desc: A cat(1) clone with wings
     exec: bat
-    inst: false
     conf: true
   - name: bitwarden-cli
     desc: Bitwarden client
     exec: bw
-    inst: false
     conf: false
   - name: cargo
     desc: The Rust package manager
     exec: cargo
-    inst: false
     conf: true
   - name: chezmoi
     desc: Manage your dotfiles across multiple diverse machines, securely
     exec: chezmoi
-    inst: false
     conf: true
   - name: curl
     desc: A command line tool and library for transferring data with URL syntax
     exec: curl
-    inst: false
     conf: false
   - name: eza
     desc: A modern alternative to ls
     exec: eza
-    inst: false
     conf: true
   - name: fd-find
     desc: A simple, fast and user-friendly alternative to 'find'
     exec: fd
-    inst: false
     conf: false
   - name: fish-shell
     desc: The user-friendly command line shell
     exec: fish
-    inst: false
     conf: true
   - name: fzf
     desc: A command-line fuzzy finder
     exec: fzf
-    inst: false
     conf: true
   - name: git
     desc: A version control system
     exec: git
-    inst: false
     conf: true
   - name: git-delta
     desc: A syntax-highlighting pager for git, diff, grep, and blame output
     exec: delta
-    inst: false
     conf: true
   - name: go
     desc: The Go programming language
     exec: go
-    inst: false
     conf: true
   - name: gpg
     desc: The GNU Privacy Guard
     exec: gpg
-    inst: false
     conf: true
   - name: homebrew
     desc: The missing package manager for macOS (or Linux)
     exec: brew
-    inst: false
     conf: true
   - name: hyper
     desc: A terminal built on web technologies
     exec: hyper
-    inst: false
     conf: true
   - name: jq
     desc: Command-line JSON processor
     exec: jq
-    inst: false
     conf: false
   - name: kitty
     desc: Cross-platform, fast, feature-rich, GPU based terminal
     exec: kitty
-    inst: false
     conf: true
   - name: kubectl
     desc: Production-Grade Container Scheduling and Management
     exec: kubectl
-    inst: false
     conf: true
   - name: podman
     desc: A tool for managing OCI containers and pods
     exec: podman
-    inst: false
     conf: true
   - name: python3
     desc: The Python programming language
     exec: python3
-    inst: false
     conf: true
   - name: ranger
     desc: A VIM-inspired filemanager for the console
     exec: ranger
-    inst: false
     conf: true
   - name: ripgrep
     desc: A line-oriented search tool that recursively searches the current directory for a regex pattern
     exec: rg
-    inst: false
     conf: true
   - name: starship
     desc: The minimal, blazing-fast, and infinitely customizable prompt for any shell
     exec: starship
-    inst: false
     conf: true
   - name: tmux
     desc: A terminal multiplexer
     exec: tmux
-    inst: false
     conf: true
   - name: vim
     desc: A lovely text editor
     exec: vim
-    inst: false
     conf: true
   - name: yc
     desc: Yandex Cloud CLI
     exec: yc
-    inst: false
     conf: true
 
