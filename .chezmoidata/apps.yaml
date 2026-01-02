@@ -62,7 +62,7 @@ apps:
     exec: eza
     conf: true
     install:
-      apt: eza
+      cargo: eza
   - name: fd-find
     desc: A simple, fast and user-friendly alternative to 'find'
     exec: fd
@@ -92,7 +92,7 @@ apps:
     exec: delta
     conf: true
     install:
-      apt: git-delta
+      cargo: git-delta
   - name: go
     desc: The Go programming language
     exec: go
@@ -144,7 +144,7 @@ apps:
     exec: rg
     conf: true
     install:
-      apt: ripgrep
+      cargo: ripgrep
   - name: starship
     desc: The minimal, blazing-fast, and infinitely customizable prompt for any shell
     exec: starship
