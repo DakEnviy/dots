@@ -2,7 +2,7 @@
 call plug#begin()
 
 " Theming
-Plug 'dikiaap/minimalist'
+Plug 'joshdick/onedark.vim'
 Plug 'tribela/vim-transparent'
 
 " Features
@@ -20,7 +20,9 @@ Plug 'imsnif/kdl.vim'
 
 call plug#end()
 
-colorscheme minimalist
+" Theme settings
+set termguicolors
+silent! colorscheme onedark
 
 " Indentation settings
 set tabstop=4
