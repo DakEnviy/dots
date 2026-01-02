@@ -172,14 +172,17 @@
 {{- end -}}
 
 data:
-  {{- dict "installable" $installable | toYaml | trim | nindent 2 }}
-  {{- dict "configurable" $configurable | toYaml | trim | nindent 2 }}
-  {{- dict "binaries" $binaries | toYaml | trim | nindent 2 }}
-  {{- dict "install" $install | toYaml | trim | nindent 2 }}
-  {{- dict "installList" $installList | toYaml | trim | nindent 2 }}
-  {{- dict "packages" $packages | toYaml | trim | nindent 2 }}
-  {{- dict "configure" $configure | toYaml | trim | nindent 2 }}
-  {{- dict "configureList" $configureList | toYaml | trim | nindent 2 }}
+  {{- dict
+        "installable" $installable
+        "configurable" $configurable
+        "binaries" $binaries
+        "install" $install
+        "installList" $installList
+        "packages" $packages
+        "configure" $configure
+        "configureList" $configureList
+      | toYaml | trim | nindent 2
+  }}
   hostType: {{ $hostType | quote }}
   ssh:
     keysUrl: {{ $sshKeysUrl | quote }}
