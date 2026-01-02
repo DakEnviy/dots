@@ -90,9 +90,13 @@
 -}}
 {{-     $_ := set $packages $m dict -}}
 {{-     range $a := $apps -}}
-{{-       if and (get $install $a.exec) (not (get $binaries $a.exec)) (get $a.install $m) (not (get $appToMethod $a.exec)) -}}
-{{-         $_ := set $appToMethod $a.exec $m -}}
-{{-         $_ := set (get $packages $m) $a.exec (get $a.install $m) -}}
+{{-       if and (get $install $a.exec) (not (get $binaries $a.exec)) -}}
+{{-         if and (get $a.install $m) (not (get $appToMethod $a.exec)) -}}
+{{-           $_ := set $appToMethod $a.exec $m -}}
+{{-           $_ := set (get $packages $m) $a.exec (get $a.install $m) -}}
+{{-         else if get $a.install (printf "%s!" $m) -}}
+{{-           $_ := set (get $packages $m) $a.exec (get $a.install (printf "%s!" $m)) -}}
+{{-         end -}}
 {{-       end -}}
 {{-     end -}}
 {{-   end -}}
