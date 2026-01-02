@@ -32,50 +32,57 @@ apps:
     desc: Manage your dotfiles across multiple diverse machines, securely
     exec: chezmoi
     conf: true
-  # TODO install
   - name: curl
     desc: A command line tool and library for transferring data with URL syntax
     exec: curl
     conf: false
-  # TODO install
+    install:
+      apt: curl
   - name: eza
     desc: A modern alternative to ls
     exec: eza
     conf: true
+    install:
+      apt: eza
   # TODO install
   - name: fd-find
     desc: A simple, fast and user-friendly alternative to 'find'
     exec: fd
     conf: false
-  # TODO install
   - name: fish-shell
     desc: The user-friendly command line shell
     exec: fish
     conf: true
-  # TODO install
+    install:
+      apt: fish
   - name: fzf
     desc: A command-line fuzzy finder
     exec: fzf
     conf: true
-  # TODO install
+    install:
+      apt: fzf
   - name: git
     desc: A version control system
     exec: git
     conf: true
-  # TODO install
+    install:
+      apt: git
   - name: git-delta
     desc: A syntax-highlighting pager for git, diff, grep, and blame output
     exec: delta
     conf: true
+    install:
+      apt: git-delta
   - name: go
     desc: The Go programming language
     exec: go
     conf: true
-  # TODO install
-  - name: gpg
+  - name: gnupg
     desc: The GNU Privacy Guard
     exec: gpg
     conf: true
+    install:
+      apt: gnupg
   - name: homebrew
     desc: The missing package manager for macOS (or Linux)
     exec: brew
@@ -84,11 +91,12 @@ apps:
     desc: A terminal built on web technologies
     exec: hyper
     conf: true
-  # TODO install
   - name: jq
     desc: Command-line JSON processor
     exec: jq
     conf: false
+    install:
+      apt: jq
   - name: kitty
     desc: Cross-platform, fast, feature-rich, GPU based terminal
     exec: kitty
@@ -111,26 +119,29 @@ apps:
     conf: true
     install:
       apt: ranger
-  # TODO install
   - name: ripgrep
     desc: A line-oriented search tool that recursively searches the current directory for a regex pattern
     exec: rg
     conf: true
+    install:
+      apt: ripgrep
   # TODO install
   - name: starship
     desc: The minimal, blazing-fast, and infinitely customizable prompt for any shell
     exec: starship
     conf: true
-  # TODO install
   - name: tmux
     desc: A terminal multiplexer
     exec: tmux
     conf: true
-  # TODO install
+    install:
+      apt: tmux
   - name: vim
     desc: A lovely text editor
     exec: vim
     conf: true
+    install:
+      apt: vim
   - name: yc
     desc: Yandex Cloud CLI
     exec: yc
