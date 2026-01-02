@@ -30,6 +30,7 @@ apps:
     exec: cargo
     conf: true
     install:
+      apt: build-essential # This packages is needed for  compiling rust packages
       script: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
   - name: chezmoi
     desc: Manage your dotfiles across multiple diverse machines, securely
