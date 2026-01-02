@@ -16,7 +16,11 @@ sudo apt install --yes {{ values .packages.apt | join " " }}
 {{ end -}}
 
 {{ if get .packages "brew" -}}
-brew --version
+brew bundle --file=/dev/stdin <<EOF
+{{ range .packages.brew -}}
+brew {{ . | quote }}
+{{ end -}}
+EOF
 
 {{ end -}}
 

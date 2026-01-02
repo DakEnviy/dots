@@ -79,6 +79,7 @@
 {{-   end -}}
 {{- end -}}
 
+{{- $appToMethod := dict -}}
 {{- $packages := dict -}}
 {{- range $m := $methods -}}
 {{-   if or
@@ -89,7 +90,8 @@
 -}}
 {{-     $_ := set $packages $m dict -}}
 {{-     range $a := $apps -}}
-{{-       if and (get $install $a.exec) (not (get $binaries $a.exec)) (get $a.install $m) (not (dig $m $a.exec "" $packages)) -}}
+{{-       if and (get $install $a.exec) (not (get $binaries $a.exec)) (get $a.install $m) (not (get $appToMethod $a.exec)) -}}
+{{-         $_ := set $appToMethod $a.exec $m -}}
 {{-         $_ := set (get $packages $m) $a.exec (get $a.install $m) -}}
 {{-       end -}}
 {{-     end -}}
