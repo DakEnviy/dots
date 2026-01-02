@@ -1,4 +1,4 @@
-{{- $apps := get (include ".apps.yaml" | fromYaml) "apps" -}}
+{{- $apps := get (include ".chezmoidata/apps.yaml" | fromYaml) "apps" -}}
 
 {{- $installable := dict -}}
 {{- range $apps -}}
