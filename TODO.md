@@ -33,6 +33,7 @@
 - [x] Do not allow choose apps which is not used for configuration
 - [x] Move apps to separate file
 - [ ] Implement auto installing chosen apps for Ubuntu
+- [ ] Add watch for edit by default
 - [ ] Implement auto installing chosen apps for Homebrew
 - [ ] Update starship config and double-check arc there
 - [ ] Check yazi

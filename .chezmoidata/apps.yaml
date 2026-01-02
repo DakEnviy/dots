@@ -14,11 +14,12 @@ apps:
     desc: Universal Command Line Interface for Amazon Web Services
     exec: aws
     conf: false
-  # TODO install
   - name: bat
     desc: A cat(1) clone with wings
     exec: bat
     conf: true
+    install:
+      cargo: bat
   # TODO install
   - name: bitwarden-cli
     desc: Bitwarden client
@@ -28,6 +29,8 @@ apps:
     desc: The Rust package manager
     exec: cargo
     conf: true
+    install:
+      script: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
   - name: chezmoi
     desc: Manage your dotfiles across multiple diverse machines, securely
     exec: chezmoi
@@ -44,11 +47,12 @@ apps:
     conf: true
     install:
       apt: eza
-  # TODO install
   - name: fd-find
     desc: A simple, fast and user-friendly alternative to 'find'
     exec: fd
     conf: false
+    install:
+      cargo: fd-find
   - name: fish-shell
     desc: The user-friendly command line shell
     exec: fish
@@ -125,11 +129,12 @@ apps:
     conf: true
     install:
       apt: ripgrep
-  # TODO install
   - name: starship
     desc: The minimal, blazing-fast, and infinitely customizable prompt for any shell
     exec: starship
     conf: true
+    install:
+      cargo: starship
   - name: tmux
     desc: A terminal multiplexer
     exec: tmux
