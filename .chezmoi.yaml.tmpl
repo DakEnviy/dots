@@ -31,6 +31,41 @@
 {{-     $nameMaxLen = len .name -}}
 {{-   end -}}
 {{- end -}}
+
+{{- $installDisplayNames := dict -}}
+{{- range $apps -}}
+{{-   if hasKey . "install" -}}
+{{-     $_ := set $installDisplayNames .exec (printf "%-*s | %s" $nameMaxLen .name .desc) -}}
+{{-   end -}}
+{{- end -}}
+{{- $install := dig "install" dict . -}}
+{{- $prevInstall := deepCopy $install -}}
+{{- if not (deepEqual $installable (dig "installable" dict .)) -}}
+{{-   $install = dict -}}
+{{-   range $apps -}}
+{{-     if hasKey . "install" -}}
+{{-       $_ := set $install .exec (any (get $prevInstall .exec) (get $binaries .exec)) -}}
+{{-     end -}}
+{{-   end -}}
+{{- end -}}
+{{- $installList := list -}}
+{{- range $exec, $installed := $install -}}
+{{-   if $installed -}}
+{{-     $installList = append $installList (get $installDisplayNames $exec) -}}
+{{-   end -}}
+{{- end -}}
+{{- if deepEqual $install $prevInstall -}}
+{{-   $installList = promptMultichoiceOnce . "installList" "Which apps need to be installed" (values $installDisplayNames | sortAlpha) $installList -}}
+{{- else -}}
+{{-   $installList = promptMultichoice "Which apps need to be installed" (values $installDisplayNames | sortAlpha) $installList -}}
+{{- end -}}
+{{- $install = dict -}}
+{{- range $apps -}}
+{{-   if hasKey . "install" -}}
+{{-     $_ := set $install .exec (has (get $installDisplayNames .exec) $installList) -}}
+{{-   end -}}
+{{- end -}}
+
 {{- $configureDisplayNames := dict -}}
 {{- range $apps -}}
 {{-   if .conf -}}
@@ -105,16 +140,13 @@
 {{- end -}}
 
 data:
-  installable:
-    {{- toYaml $installable | trim | nindent 4 }}
-  configurable:
-    {{- toYaml $configurable | trim | nindent 4 }}
-  binaries:
-    {{- toYaml $binaries | trim | nindent 4 }}
-  configure:
-    {{- toYaml $configure | trim | nindent 4 }}
-  configureList:
-    {{- toYaml $configureList | trim | nindent 4 }}
+  {{- dict "installable" $installable | toYaml | trim | nindent 2 }}
+  {{- dict "configurable" $configurable | toYaml | trim | nindent 2 }}
+  {{- dict "binaries" $binaries | toYaml | trim | nindent 2 }}
+  {{- dict "install" $install | toYaml | trim | nindent 2 }}
+  {{- dict "installList" $installList | toYaml | trim | nindent 2 }}
+  {{- dict "configure" $configure | toYaml | trim | nindent 2 }}
+  {{- dict "configureList" $configureList | toYaml | trim | nindent 2 }}
   hostType: {{ $hostType | quote }}
   ssh:
     keysUrl: {{ $sshKeysUrl | quote }}
@@ -128,14 +160,14 @@ data:
   {{- /* unsafe is used to prompt empty variables */}}
   unsafe:
     _: ""
-    {{- if $sshKeysUrl }}
-    sshKeysUrl: {{ $sshKeysUrl | quote }}
+    {{- with $sshKeysUrl }}
+    sshKeysUrl: {{ . | quote }}
     {{- end }}
-    {{- if $gitName }}
-    gitName: {{ $gitName | quote }}
+    {{- with $gitName }}
+    gitName: {{ . | quote }}
     {{- end }}
-    {{- if $gitEmail }}
-    gitEmail: {{ $gitEmail | quote }}
+    {{- with $gitEmail }}
+    gitEmail: {{ . | quote }}
     {{- end }}
 
 bitwarden:
