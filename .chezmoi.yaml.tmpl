@@ -1,4 +1,10 @@
+{{- $packageManagers := get (include ".chezmoidata/package_managers.yaml" | fromYaml) "packageManagers" -}}
 {{- $apps := get (include ".chezmoidata/apps.yaml" | fromYaml) "apps" -}}
+
+{{- $methods := concat
+      (values $packageManagers | uniq)
+      (list "cargo" "script" "external")
+-}}
 
 {{- $installable := dict -}}
 {{- range $apps -}}
@@ -14,6 +20,8 @@
 {{- if hasKey .chezmoi.osRelease "id" -}}
 {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
+
+{{- $manager := get $packageManagers $osid -}}
 
 {{- $homePath := list
       (joinPath .chezmoi.homeDir ".local/bin")
@@ -68,6 +76,23 @@
 {{- range $apps -}}
 {{-   if hasKey . "install" -}}
 {{-     $_ := set $install .exec (has (get $installDisplayNames .exec) $installList) -}}
+{{-   end -}}
+{{- end -}}
+
+{{- $packages := dict -}}
+{{- range $m := $methods -}}
+{{-   if or
+        (and (eq $m $manager) (get $binaries $m))
+        (and (eq $m "cargo") $binaries.cargo)
+        (eq $m "script")
+        (eq $m "external")
+-}}
+{{-     $_ := set $packages $m dict -}}
+{{-     range $a := $apps -}}
+{{-       if and (get $install $a.exec) (not (get $binaries $a.exec)) (get $a.install $m) (not (dig $m $a.exec "" $packages)) -}}
+{{-         $_ := set (get $packages $m) $a.exec (get $a.install $m) -}}
+{{-       end -}}
+{{-     end -}}
 {{-   end -}}
 {{- end -}}
 
@@ -147,10 +172,10 @@
 data:
   {{- dict "installable" $installable | toYaml | trim | nindent 2 }}
   {{- dict "configurable" $configurable | toYaml | trim | nindent 2 }}
-  osid: {{ $osid | quote }}
   {{- dict "binaries" $binaries | toYaml | trim | nindent 2 }}
   {{- dict "install" $install | toYaml | trim | nindent 2 }}
   {{- dict "installList" $installList | toYaml | trim | nindent 2 }}
+  {{- dict "packages" $packages | toYaml | trim | nindent 2 }}
   {{- dict "configure" $configure | toYaml | trim | nindent 2 }}
   {{- dict "configureList" $configureList | toYaml | trim | nindent 2 }}
   hostType: {{ $hostType | quote }}

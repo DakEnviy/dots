@@ -1,9 +1,17 @@
+{{ if get .packages "external" -}}
+{{- range .packages.external }}
+{{ .target | quote }}:
+  {{- .config | toYaml | trim | nindent 2 | replace "$platform" ($.chezmoi.os | replace "darwin" "macos") }}
+{{- end }}
+
+{{ end -}}
+
 {{ if .ssh.keysUrl -}}
 .ssh/authorized_keys:
   type: file
   url: {{ .ssh.keysUrl | quote }}
-  refreshPeriod: 24h
   private: true
+  refreshPeriod: 24h
 
 {{ end -}}
 

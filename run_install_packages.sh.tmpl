@@ -1,54 +1,32 @@
-{{- $manager := get .packageManagers .osid -}}
-
-{{- $methods := concat
-      (values .packageManagers | uniq)
-      (list "cargo" "script")
--}}
-
-{{- $packages := dict -}}
-{{- range $m := $methods -}}
-{{-   if or
-        (and (eq $m $manager) (get $.binaries $m))
-        (and (eq $m "cargo") $.binaries.cargo)
-        (eq $m "script")
--}}
-{{-     $_ := set $packages $m dict -}}
-{{-     range $a := $.apps -}}
-{{-       if and (get $.install $a.exec) (not (get $.binaries $a.exec)) (get $a.install $m) (not (dig $m $a.exec "" $packages)) -}}
-{{-         $_ := set (get $packages $m) $a.exec (get $a.install $m) -}}
-{{-       end -}}
-{{-     end -}}
+{{- $packagesCount := 0 -}}
+{{- range $m, $as := .packages -}}
+{{-   if ne $m "external" -}}
+{{-     $packagesCount = add $packagesCount (len $as) -}}
 {{-   end -}}
 {{- end -}}
-
-{{- $packagesCount := 0 -}}
-{{- range $m, $as := $packages -}}
-{{-   $packagesCount = add $packagesCount (len $as) -}}
-{{- end -}}
-
 
 {{ if gt $packagesCount 0 -}}
 #!/usr/bin/env bash
 set -euo pipefail
 
-{{ if get $packages "apt" -}}
+{{ if get .packages "apt" -}}
 sudo apt update
-sudo apt install --yes {{ values $packages.apt | join " " }}
+sudo apt install --yes {{ values .packages.apt | join " " }}
 
 {{ end -}}
 
-{{ if get $packages "brew" -}}
+{{ if get .packages "brew" -}}
 brew --version
 
 {{ end -}}
 
-{{ if get $packages "cargo" -}}
-{{ .binaries.cargo }} install {{ values $packages.cargo | join " " }}
+{{ if get .packages "cargo" -}}
+{{ .binaries.cargo }} install {{ values .packages.cargo | join " " }}
 
 {{ end -}}
 
-{{ if get $packages "script" -}}
-{{ values $packages.script | join "\n" }}
+{{ if get .packages "script" -}}
+{{ values .packages.script | join "\n" }}
 
 {{ end -}}
 

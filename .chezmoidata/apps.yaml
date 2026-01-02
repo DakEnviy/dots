@@ -20,11 +20,19 @@ apps:
     conf: true
     install:
       cargo: bat
-  # TODO install
   - name: bitwarden-cli
     desc: Bitwarden client
     exec: bw
     conf: false
+    install:
+      external:
+        target: .local/bin/bw
+        config:
+          type: archive-file
+          url: https://bitwarden.com/download/?app=cli&platform=$platform
+          path: bw
+          executable: true
+          refreshPeriod: 168h
   - name: cargo
     desc: The Rust package manager
     exec: cargo
