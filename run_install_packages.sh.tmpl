@@ -1,51 +1,54 @@
+{{- $manager := get .packageManagers .osid -}}
+
 {{- $methods := concat
       (values .packageManagers | uniq)
       (list "cargo" "script")
 -}}
+
 {{- $packages := dict -}}
 {{- range $m := $methods -}}
-{{-   $_ := set $packages $m list -}}
-{{- end -}}
-{{- range $a := .apps -}}
-{{-   if and (get $.install $a.exec) (not (get $.binaries $a.exec)) -}}
-{{-     range $m := $methods -}}
-{{-       if get $a.install $m -}}
-{{-         $_ := set $packages $m (append (get $packages $m) (get $a.install $m)) -}}
+{{-   if or
+        (and (eq $m $manager) (get $.binaries $m))
+        (and (eq $m "cargo") $.binaries.cargo)
+        (eq $m "script")
+-}}
+{{-     $_ := set $packages $m dict -}}
+{{-     range $a := $.apps -}}
+{{-       if and (get $.install $a.exec) (not (get $.binaries $a.exec)) (get $a.install $m) (not (dig $m $a.exec "" $packages)) -}}
+{{-         $_ := set (get $packages $m) $a.exec (get $a.install $m) -}}
 {{-       end -}}
 {{-     end -}}
 {{-   end -}}
 {{- end -}}
 
-{{- $manager := get .packageManagers .osid -}}
+{{- $packagesCount := 0 -}}
+{{- range $m, $as := $packages -}}
+{{-   $packagesCount = add $packagesCount (len $as) -}}
+{{- end -}}
 
-{{ if or
-     (and (eq $manager "apt") .binaries.apt $packages.apt)
-     (and (eq $manager "brew") .binaries.brew $packages.brew)
-     (and .binaries.cargo $packages.cargo)
-     $packages.script
--}}
 
+{{ if gt $packagesCount 0 -}}
 #!/usr/bin/env bash
 set -euo pipefail
 
-{{ if and (eq $manager "apt") .binaries.apt $packages.apt -}}
+{{ if get $packages "apt" -}}
 sudo apt update
-sudo apt install --yes {{ $packages.apt | join " " }}
+sudo apt install --yes {{ values $packages.apt | join " " }}
 
 {{ end -}}
 
-{{ if and (eq $manager "brew") .binaries.brew $packages.brew -}}
+{{ if get $packages "brew" -}}
 brew --version
 
 {{ end -}}
 
-{{ if and .binaries.cargo $packages.cargo -}}
-{{ .binaries.cargo }} install {{ $packages.cargo | join " " }}
+{{ if get $packages "cargo" -}}
+{{ .binaries.cargo }} install {{ values $packages.cargo | join " " }}
 
 {{ end -}}
 
-{{ if $packages.script -}}
-{{ $packages.script | join "\n" }}
+{{ if get $packages "script" -}}
+{{ values $packages.script | join "\n" }}
 
 {{ end -}}
 
