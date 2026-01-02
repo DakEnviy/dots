@@ -10,6 +10,11 @@
 {{-   $_ := set $configurable .exec .conf -}}
 {{- end -}}
 
+{{- $osid := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
 {{- $homePath := list
       (joinPath .chezmoi.homeDir ".local/bin")
       (joinPath .chezmoi.homeDir ".cargo/bin")
@@ -142,6 +147,7 @@
 data:
   {{- dict "installable" $installable | toYaml | trim | nindent 2 }}
   {{- dict "configurable" $configurable | toYaml | trim | nindent 2 }}
+  osid: {{ $osid | quote }}
   {{- dict "binaries" $binaries | toYaml | trim | nindent 2 }}
   {{- dict "install" $install | toYaml | trim | nindent 2 }}
   {{- dict "installList" $installList | toYaml | trim | nindent 2 }}

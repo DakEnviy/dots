@@ -6,14 +6,20 @@
 # - dust
 # - yq
 apps:
+  - name: apt
+    desc: The main command-line package manager for Debian and its derivatives
+    exec: apt
+    conf: false
   - name: aws-cli
     desc: Universal Command Line Interface for Amazon Web Services
     exec: aws
     conf: false
+  # TODO install
   - name: bat
     desc: A cat(1) clone with wings
     exec: bat
     conf: true
+  # TODO install
   - name: bitwarden-cli
     desc: Bitwarden client
     exec: bw
@@ -26,30 +32,37 @@ apps:
     desc: Manage your dotfiles across multiple diverse machines, securely
     exec: chezmoi
     conf: true
+  # TODO install
   - name: curl
     desc: A command line tool and library for transferring data with URL syntax
     exec: curl
     conf: false
+  # TODO install
   - name: eza
     desc: A modern alternative to ls
     exec: eza
     conf: true
+  # TODO install
   - name: fd-find
     desc: A simple, fast and user-friendly alternative to 'find'
     exec: fd
     conf: false
+  # TODO install
   - name: fish-shell
     desc: The user-friendly command line shell
     exec: fish
     conf: true
+  # TODO install
   - name: fzf
     desc: A command-line fuzzy finder
     exec: fzf
     conf: true
+  # TODO install
   - name: git
     desc: A version control system
     exec: git
     conf: true
+  # TODO install
   - name: git-delta
     desc: A syntax-highlighting pager for git, diff, grep, and blame output
     exec: delta
@@ -58,6 +71,7 @@ apps:
     desc: The Go programming language
     exec: go
     conf: true
+  # TODO install
   - name: gpg
     desc: The GNU Privacy Guard
     exec: gpg
@@ -70,6 +84,7 @@ apps:
     desc: A terminal built on web technologies
     exec: hyper
     conf: true
+  # TODO install
   - name: jq
     desc: Command-line JSON processor
     exec: jq
@@ -94,18 +109,24 @@ apps:
     desc: A VIM-inspired filemanager for the console
     exec: ranger
     conf: true
+    install:
+      apt: ranger
+  # TODO install
   - name: ripgrep
     desc: A line-oriented search tool that recursively searches the current directory for a regex pattern
     exec: rg
     conf: true
+  # TODO install
   - name: starship
     desc: The minimal, blazing-fast, and infinitely customizable prompt for any shell
     exec: starship
     conf: true
+  # TODO install
   - name: tmux
     desc: A terminal multiplexer
     exec: tmux
     conf: true
+  # TODO install
   - name: vim
     desc: A lovely text editor
     exec: vim

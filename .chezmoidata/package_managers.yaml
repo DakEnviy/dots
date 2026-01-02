@@ -1,0 +1,4 @@
+packageManagers:
+  linux-ubuntu: apt
+  darwin: brew
+
