@@ -146,6 +146,7 @@
 {{- $sshKeysUrl := dig "ssh" "keysUrl" "" . -}}
 {{- if eq $hostType "server" -}}
 {{-   $sshKeysUrl = promptStringOnce . "unsafe.sshKeysUrl" "Which URL use to fetch public SSH keys" $sshKeysUrl -}}
+{{-   $sshKeysUrl = regexMatch "^https?://" $sshKeysUrl | ternary $sshKeysUrl (printf "https://%s" $sshKeysUrl) -}}
 {{- else -}}
 {{-   $sshKeysUrl = "" -}}
 {{- end -}}
