@@ -35,6 +35,8 @@
 - [x] Implement auto installing chosen apps for Ubuntu
 - [x] Add watch for edit by default
 - [x] Implement auto installing chosen apps for Homebrew
+- [ ] Support `sshKeysUrl` without scheme
+- [ ] Add README
 - [ ] Update starship config and double-check arc there
 - [ ] Check yazi
 - [ ] Add ssh-agent
