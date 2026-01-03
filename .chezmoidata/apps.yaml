@@ -81,6 +81,7 @@ apps:
     install:
       brew: fish
       apt: fish
+      script!: sudo chsh -s /bin/fish "$USER"
   - name: fzf
     desc: A command-line fuzzy finder
     exec: fzf
