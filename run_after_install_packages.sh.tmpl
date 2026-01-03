@@ -1,8 +1,6 @@
 {{- $packagesCount := 0 -}}
 {{- range $m, $as := .packages -}}
-{{-   if ne $m "external" -}}
-{{-     $packagesCount = add $packagesCount (len $as) -}}
-{{-   end -}}
+{{-   $packagesCount = add $packagesCount (len $as) -}}
 {{- end -}}
 
 {{ if gt $packagesCount 0 -}}
@@ -33,6 +31,9 @@ EOF
 {{ values .packages.script | join "\n" }}
 
 {{ end -}}
+
+echo {{ printf "%d packages were installed. Re-init required" $packagesCount | quote }}
+touch {{ joinPath .chezmoi.cacheDir ".reinit" }}
 
 {{ end -}}
 
