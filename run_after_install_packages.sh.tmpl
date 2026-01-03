@@ -32,7 +32,7 @@ EOF
 
 {{ end -}}
 
-echo {{ printf "%d packages were installed. Re-init required" $packagesCount | quote }}
+echo {{ printf "%d packages were installed. Re-init is required" $packagesCount | quote }}
 touch {{ joinPath .chezmoi.cacheDir ".reinit" }}
 
 {{ end -}}
