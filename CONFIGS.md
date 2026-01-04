@@ -127,3 +127,4 @@ See [`dot_config/ranger/rc.conf.tmpl`](dot_config/ranger/rc.conf.tmpl) for full 
 - Install to user directory by default
 
 See [`dot_config/pip/pip.conf.tmpl`](dot_config/pip/pip.conf.tmpl) for configuration.
+

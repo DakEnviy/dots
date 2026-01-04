@@ -6,6 +6,8 @@
 
 **More than just dotfiles.** An intelligent framework that detects your environment, installs selected apps, and configures them dynamically.
 
+[Demo](https://youtu.be/h2QWn8uz6uU) • [Features](#-features) • [Installation](#-installation) • [Template](https://github.com/DakEnviy/dots-template)
+
 <p align="center"><img src="images/banner.png" alt="Dotfiles Banner" width="100%"></p>
 
 ## ⚡ Why this framework?
@@ -57,3 +59,4 @@ chezmoi apply          # Apply new choices
 ```
 
 **Syncing changes**: Use standard git commands in the source directory (`~/.local/share/chezmoi`) to commit, push, and pull your changes.
+
