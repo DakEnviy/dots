@@ -40,7 +40,7 @@ apps:
     exec: cargo
     conf: true
     install:
-      apt!: build-essential # This packages is needed for  compiling rust packages
+      apt!: build-essential # This packages is needed for compiling rust packages
       script: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
   - name: cargo-update
     desc: The Rust package manager
@@ -67,13 +67,6 @@ apps:
     install:
       apt: curl
       brew: curl
-  - name: eza
-    desc: A modern alternative to ls
-    exec: eza
-    conf: true
-    install:
-      brew: eza
-      cargo: eza
   - name: doge
     desc: Reviving A command-line DNS client
     exec: doge
@@ -95,6 +88,13 @@ apps:
     install:
       brew: dust
       cargo: du-dust
+  - name: eza
+    desc: A modern alternative to ls
+    exec: eza
+    conf: true
+    install:
+      brew: eza
+      cargo: eza
   - name: fd-find
     desc: A simple, fast and user-friendly alternative to 'find'
     exec: fd
