@@ -1,10 +1,3 @@
-# Other useful apps:
-# - btop
-# - cloc
-# - dog
-# - duf
-# - dust
-# - yq
 apps:
   - name: apt
     desc: The main command-line package manager for Debian and its derivatives
@@ -35,6 +28,13 @@ apps:
           path: bw
           executable: true
           refreshPeriod: 168h
+  - name: btop
+    desc: A monitor of resources
+    exec: btop
+    conf: false
+    install:
+      apt: btop
+      brew: btop
   - name: cargo
     desc: The Rust package manager
     exec: cargo
@@ -53,13 +53,20 @@ apps:
     desc: Manage your dotfiles across multiple diverse machines, securely
     exec: chezmoi
     conf: true
+  - name: cloc
+    desc: Count Lines of Code
+    exec: cloc
+    conf: false
+    install:
+      apt: cloc
+      brew: cloc
   - name: curl
     desc: A command line tool and library for transferring data with URL syntax
     exec: curl
     conf: false
     install:
-      brew: curl
       apt: curl
+      brew: curl
   - name: eza
     desc: A modern alternative to ls
     exec: eza
@@ -67,6 +74,27 @@ apps:
     install:
       brew: eza
       cargo: eza
+  - name: doge
+    desc: Reviving A command-line DNS client
+    exec: doge
+    conf: false
+    install:
+      brew: doge
+      cargo: dns-doge
+  - name: duf
+    desc: Disk Usage/Free Utility - a better 'df' alternative
+    exec: duf
+    conf: false
+    install:
+      apt: duf
+      brew: duf
+  - name: dust
+    desc: A more intuitive version of du in rust
+    exec: dust
+    conf: false
+    install:
+      brew: dust
+      cargo: du-dust
   - name: fd-find
     desc: A simple, fast and user-friendly alternative to 'find'
     exec: fd
@@ -79,23 +107,23 @@ apps:
     exec: fish
     conf: true
     install:
-      brew: fish
       apt: fish
+      brew: fish
       script!: sudo chsh -s /bin/fish "$USER"
   - name: fzf
     desc: A command-line fuzzy finder
     exec: fzf
     conf: true
     install:
-      brew: fzf
       apt: fzf
+      brew: fzf
   - name: git
     desc: A version control system
     exec: git
     conf: true
     install:
-      brew: git
       apt: git
+      brew: git
   - name: git-delta
     desc: A syntax-highlighting pager for git, diff, grep, and blame output
     exec: delta
@@ -112,8 +140,8 @@ apps:
     exec: gpg
     conf: true
     install:
-      brew: gnupg
       apt: gnupg
+      brew: gnupg
   - name: homebrew
     desc: The missing package manager for macOS (or Linux)
     exec: brew
@@ -127,8 +155,8 @@ apps:
     exec: jq
     conf: false
     install:
-      brew: jq
       apt: jq
+      brew: jq
   - name: kitty
     desc: Cross-platform, fast, feature-rich, GPU based terminal
     exec: kitty
@@ -150,8 +178,8 @@ apps:
     exec: ranger
     conf: true
     install:
-      brew: ranger
       apt: ranger
+      brew: ranger
   - name: ripgrep
     desc: A line-oriented search tool that recursively searches the current directory for a regex pattern
     exec: rg
@@ -171,17 +199,30 @@ apps:
     exec: tmux
     conf: true
     install:
-      brew: tmux
       apt: tmux
+      brew: tmux
   - name: vim
     desc: A lovely text editor
     exec: vim
     conf: true
     install:
-      brew: vim
       apt: vim
+      brew: vim
   - name: yc
     desc: Yandex Cloud CLI
     exec: yc
     conf: true
+  - name: yq
+    desc: A portable command-line YAML processor
+    exec: yq
+    conf: false
+    install:
+      brew: yq
+      external:
+        target: .local/bin/yq
+        config:
+          type: file
+          url: https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          executable: true
+          refreshPeriod: 168h
 
