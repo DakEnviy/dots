@@ -1,6 +1,6 @@
 {{ if .configure.fish -}}
 # Load user configurations (it is needed to separate fisher and user configurations)
-for file in "$__fish_config_dir"/user.{conf.d,completions}/*.fish
+for file in "$__fish_config_dir"/user.{functions,conf.d,completions}/*.fish
     source "$file"
 end
 
