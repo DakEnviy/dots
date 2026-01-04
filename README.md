@@ -38,6 +38,8 @@ sh -c "$(curl -fsLS dots.dakenviy.tech)"
 
 And answer the prompts to install the needed tools and configs for them.
 
+> **🏗️ Want to build your own?** Use the [clean template](https://github.com/DakEnviy/dots-template) to create your intelligent dotfiles system.
+
 ## 🚀 Usage
 
 ```bash
