@@ -58,7 +58,7 @@
     m = !git checkout $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///')
     prm = !git pull -r origin $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///')
     new = !git checkout $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///') && git pull && git checkout -b
-    wip = !git add . && git commit -m 'wip' -n
+    wip = !git add . && git commit -m 'wip' -n --no-gpg-sign
     unwip = !git reset --soft HEAD^ && git reset HEAD .
 
 [include]
