@@ -24,6 +24,7 @@ This document provides detailed information about each configuration file manage
 
 ### Plugins (fisher)
 - `theme-kawasaki`, `z` (smart cd), `nvm.fish`
+- `eza` (ls replacement) — if eza is installed
 - `fifc` (FZF completion) — if FZF is installed
 - `fzf.fish` (file/history search) — if FZF, fd, bat are installed
 
