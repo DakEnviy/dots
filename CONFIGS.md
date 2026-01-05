@@ -2,6 +2,17 @@
 
 This document provides detailed information about each configuration file managed by this dotfiles repository.
 
+**Table of Contents**
+- [Fish Shell](#fish-shell)
+- [Starship](#starship)
+- [Hyper](#hyper)
+- [GPG](#gpg)
+- [Git](#git)
+- [Vim](#vim)
+- [Tmux](#tmux)
+- [Ranger](#ranger)
+- [Python/pip](#pythonpip)
+
 ## Fish Shell
 
 ### Core
