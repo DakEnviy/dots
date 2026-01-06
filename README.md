@@ -3,6 +3,7 @@
 ![Manager](https://img.shields.io/badge/manager-chezmoi-blue?style=for-the-badge&logo=linuxcontainers&logoColor=white)
 ![Supported](https://img.shields.io/badge/supported-Ubuntu%20%7C%20Mac-violet?style=for-the-badge&logo=linux&logoColor=white)
 ![Shell](https://img.shields.io/badge/shell-fish-green?style=for-the-badge&logo=fishshell&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge)
 
 **More than just dotfiles.** An intelligent framework that detects your environment, installs selected apps, and configures them dynamically.
 
@@ -62,4 +63,8 @@ chezmoi apply          # Apply new choices
 ```
 
 **Syncing changes**: Use standard git commands in the source directory (`~/.local/share/chezmoi`) to commit, push, and pull your changes.
+
+## 📄 License
+
+This project is licensed under the terms of the MIT license — see the [LICENSE](LICENSE) file for details.
 
