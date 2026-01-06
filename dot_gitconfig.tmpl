@@ -55,9 +55,9 @@
     edit = commit --amend
     amend = commit --all --amend --no-edit
     unstage = reset HEAD --
-    m = !git checkout $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///')
-    prm = !git pull -r origin $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///')
-    new = !git checkout $(git rev-parse --abbrev-ref origin/HEAD | sed 's/^origin\\///') && git pull && git checkout -b
+    m = !git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+    prm = !git pull -r origin $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+    new = !git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@') && git pull && git checkout -b
     wip = !git add . && git commit -m 'wip' -n --no-gpg-sign
     unwip = !git reset --soft HEAD^ && git reset HEAD .
 
