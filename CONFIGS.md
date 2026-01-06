@@ -35,8 +35,7 @@ This document provides detailed information about each configuration file manage
 ### Tool Integrations
 - **bat**: TwoDark theme, man pages via bat, `bathelp` alias
 - **brew**: Shell environment setup
-- **chezmoi**: `ch` alias
-- **eza**: `ll`, `lla`, `llt` functions (icons, octal perms, tree)
+- **chezmoi**: `ch` alias and update reminder
 - **go**: `GOPATH=~/.go`, bin in PATH
 - **gpg**: `GPG_TTY`, `bw-gpg-import`/`bw-gpg-choose` functions (Bitwarden integration)
 - **kubectl**: `k` alias

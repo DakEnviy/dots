@@ -27,6 +27,9 @@ Most dotfiles are static: they copy files and hope you have the right apps insta
 - **🖥️ Context Awareness**: Distinguishes between `desktop` and `server` environments to apply relevant logic (e.g., GPG setup only on desktop).
 - **🔐 Secret Management**: Integrates with Bitwarden to fetch GPG keys and auto-configures Git commit signing. On servers, it can fetch and populate SSH `authorized_keys` from a URL.
 - **🔌 Plugin Automation**: Automatically manages plugins for Fish (`fisher`), Tmux (`tpm`), and Vim (`vim-plug`).
+- **🔔 Update Reminder**: Notifies you when dotfiles updates are available upstream, with automatic background checks on each shell session.
+
+  <img src="images/reminder.png" alt="Reminder Screenshot" height="220px">
 
 > 📚 See [CONFIGS.md](CONFIGS.md) for detailed documentation of each configuration.
 
