@@ -38,9 +38,9 @@
 - [x] Support `sshKeysUrl` without scheme
 - [x] Add README
 - [x] Make dots-template
-- [ ] Check https://github.com/chezmoi/dotfiles
-- [ ] Update starship config and double-check arc there
+- [x] Check https://github.com/chezmoi/dotfiles
 - [ ] Check yazi
+- [ ] Update starship config and double-check arc there
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
 - [ ] Add pnpm
