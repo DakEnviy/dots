@@ -37,8 +37,8 @@
 - [x] Implement auto installing chosen apps for Homebrew
 - [x] Support `sshKeysUrl` without scheme
 - [x] Add README
+- [x] Make dots-template
 - [ ] Check https://github.com/chezmoi/dotfiles
-- [ ] Make dots-template
 - [ ] Update starship config and double-check arc there
 - [ ] Check yazi
 - [ ] Add ssh-agent
