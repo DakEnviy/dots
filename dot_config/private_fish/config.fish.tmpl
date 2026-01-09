@@ -37,7 +37,7 @@ set fzf_diff_highlighter delta --paging=never --width=20
 {{ end -}}
 
 {{ if and .configure.eza .binaries.eza -}}
-set EZA_STANDARD_OPTIONS --group --group-directories-first --icons
+set EZA_STANDARD_OPTIONS --group --group-directories-first --icons --hyperlink
 alias llt 'eza $EZA_STANDARD_OPTIONS --tree'
 
 {{ end -}}
