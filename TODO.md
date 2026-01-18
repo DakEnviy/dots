@@ -40,6 +40,8 @@
 - [x] Make dots-template
 - [x] Check https://github.com/chezmoi/dotfiles
 - [x] Configure ghostty
+- [ ] Implement cask installation
+- [ ] Add setting window title for fish and vim
 - [ ] Configure yazi
 - [ ] Add vscode config
 - [ ] Update starship config and double-check arc there
