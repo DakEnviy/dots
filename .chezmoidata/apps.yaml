@@ -161,10 +161,6 @@ apps:
     install:
       apt: jq
       brew: jq
-  - name: kitty
-    desc: Cross-platform, fast, feature-rich, GPU based terminal
-    exec: kitty
-    conf: true
   - name: kubectl
     desc: Production-Grade Container Scheduling and Management
     exec: kubectl

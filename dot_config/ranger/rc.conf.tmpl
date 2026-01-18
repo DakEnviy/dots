@@ -1,10 +1,5 @@
 {{ if .configure.ranger -}}
 default_linemode devicons
 
-{{ if and .configure.kitty .binaries.kitty -}}
-set preview_images true
-set preview_images_method kitty
-
-{{ end -}}
 {{ end -}}
 
