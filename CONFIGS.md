@@ -5,6 +5,7 @@ This document provides detailed information about each configuration file manage
 **Table of Contents**
 - [Fish Shell](#fish-shell)
 - [Starship](#starship)
+- [Ghostty](#ghostty)
 - [Hyper](#hyper)
 - [GPG](#gpg)
 - [Git](#git)
@@ -59,6 +60,17 @@ This document provides detailed information about each configuration file manage
 - Time and sudo indicators enabled
 
 See [`dot_config/starship.toml.tmpl`](dot_config/starship.toml.tmpl) for full configuration.
+
+## Ghostty
+
+### Notable Features
+- **Font**: FiraCode Nerd Font Mono, 15px, thickened
+- **Theme**: Night Owl
+- **Background**: Semi-transparent (95%) with blur effect
+- **Settings**: Ligatures disabled, mouse hidden while typing, custom padding
+- **MacOS**: Tabs-style titlebar
+
+See [`dot_config/ghostty/config.tmpl`](dot_config/ghostty/config.tmpl) for full configuration.
 
 ## Hyper
 
