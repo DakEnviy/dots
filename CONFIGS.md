@@ -6,7 +6,6 @@ This document provides detailed information about each configuration file manage
 - [Fish Shell](#fish-shell)
 - [Starship](#starship)
 - [Ghostty](#ghostty)
-- [Hyper](#hyper)
 - [GPG](#gpg)
 - [Git](#git)
 - [Vim](#vim)
@@ -71,17 +70,6 @@ See [`dot_config/starship.toml.tmpl`](dot_config/starship.toml.tmpl) for full co
 - **MacOS**: Tabs-style titlebar
 
 See [`dot_config/ghostty/config.tmpl`](dot_config/ghostty/config.tmpl) for full configuration.
-
-## Hyper
-
-### Notable Features
-- **Font**: FiraCode Nerd Font, 15px
-- **Theme**: Night Owl (via plugin)
-- **Plugins**: hyperborder (gradient border), hyperminimal
-- **Custom colors**: Pink cursor with selection, black bg
-- **Settings**: Ligatures disabled, preserve CWD, alt as meta
-
-See [`dot_hyper.js.tmpl`](dot_hyper.js.tmpl) for full configuration.
 
 ## GPG
 

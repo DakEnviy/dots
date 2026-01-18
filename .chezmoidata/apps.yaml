@@ -150,10 +150,6 @@ apps:
     desc: The missing package manager for macOS (or Linux)
     exec: brew
     conf: true
-  - name: hyper
-    desc: A terminal built on web technologies
-    exec: hyper
-    conf: true
   - name: jq
     desc: Command-line JSON processor
     exec: jq
