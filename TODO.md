@@ -40,7 +40,7 @@
 - [x] Make dots-template
 - [x] Check https://github.com/chezmoi/dotfiles
 - [x] Configure ghostty
-- [ ] Implement cask installation
+- [x] Implement cask installation
 - [ ] Add setting window title for fish and vim
 - [ ] Configure yazi
 - [ ] Add vscode config
