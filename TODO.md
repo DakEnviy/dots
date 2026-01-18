@@ -39,8 +39,11 @@
 - [x] Add README
 - [x] Make dots-template
 - [x] Check https://github.com/chezmoi/dotfiles
-- [ ] Check yazi
+- [x] Configure ghostty
+- [ ] Configure yazi
+- [ ] Add vscode config
 - [ ] Update starship config and double-check arc there
+- [ ] Add light theme variant
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
 - [ ] Add pnpm

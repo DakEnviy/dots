@@ -117,6 +117,10 @@ apps:
     install:
       apt: fzf
       brew: fzf
+  - name: ghostty
+    desc: A fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration
+    exec: ghostty
+    conf: true
   - name: git
     desc: A version control system
     exec: git
