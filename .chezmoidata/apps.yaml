@@ -121,6 +121,8 @@ apps:
     desc: A fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration
     exec: ghostty
     conf: true
+    install:
+      brew: cask "ghostty"
   - name: git
     desc: A version control system
     exec: git
