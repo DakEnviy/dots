@@ -41,7 +41,7 @@
 - [x] Check https://github.com/chezmoi/dotfiles
 - [x] Configure ghostty
 - [x] Implement cask installation
-- [ ] Add setting window title for fish and vim
+- [x] Add setting window title for fish and vim
 - [ ] Configure yazi
 - [ ] Support fonts
 - [ ] Add vscode config
