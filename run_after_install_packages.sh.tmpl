@@ -29,7 +29,7 @@ EOF
 {{ end -}}
 
 {{ if get .packages "cargo" -}}
-{{ .binaries.cargo }} install {{ values .packages.cargo | join " " }}
+{{ .binaries.cargo }} install --locked {{ values .packages.cargo | join " " }}
 
 {{ end -}}
 
