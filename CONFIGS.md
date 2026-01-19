@@ -69,6 +69,7 @@ See [`dot_config/starship.toml.tmpl`](dot_config/starship.toml.tmpl) for full co
 - **Theme**: Night Owl
 - **Background**: Semi-transparent (95%) with blur effect
 - **Settings**: Ligatures disabled, mouse hidden while typing, custom padding
+- **Shell**: SSH integrations enabled
 - **MacOS**: Tabs-style titlebar
 
 See [`dot_config/ghostty/config.tmpl`](dot_config/ghostty/config.tmpl) for full configuration.
