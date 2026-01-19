@@ -11,6 +11,7 @@ This document provides detailed information about each configuration file manage
 - [Vim](#vim)
 - [Tmux](#tmux)
 - [Ranger](#ranger)
+- [Yazi](#yazi)
 - [Python/pip](#pythonpip)
 
 ## Fish Shell
@@ -47,6 +48,7 @@ This document provides detailed information about each configuration file manage
 - **starship**: Auto-init in interactive sessions
 - **tmux**: `tn` alias (PID-based session), auto-kill on exit
 - **vim**: `EDITOR` variable
+- **yazi**: `y` alias, changes to last visited directory on exit
 - **yc**: `ycs3` alias (aws CLI + Yandex S3 endpoint, requires aws-cli)
 
 ## Starship
@@ -130,6 +132,21 @@ See [`dot_tmux.conf.tmpl`](dot_tmux.conf.tmpl) for full configuration.
 - Image preview via Kitty (if installed)
 
 See [`dot_config/ranger/rc.conf.tmpl`](dot_config/ranger/rc.conf.tmpl) for full configuration.
+
+## Yazi
+
+### Plugins (ya pkg)
+- `full-border`, `smart-enter`, `chmod`
+- `git` (file status icons) — if git is installed
+
+### Notable Features
+- **Theme**: TwoDark syntax highlighting (same as bat)
+- **UI**: Full border, custom status bar with user:group and mtime
+- **Settings**: Hidden files shown, size linemode
+- **Git**: Status icons, `gr` to jump to git root
+- **Keymaps**: `l` (smart-enter), `cm` (chmod), `Ctrl+o` (macOS Quick Look)
+
+See [`dot_config/yazi`](dot_config/yazi) for full configuration.
 
 ## Python/pip
 

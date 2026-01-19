@@ -206,6 +206,13 @@ apps:
     install:
       apt: vim
       brew: vim
+  - name: yazi
+    desc: Blazing fast terminal file manager written in Rust, based on async I/O
+    exec: yazi
+    conf: true
+    install:
+      brew: yazi
+      cargo: yazi-build
   - name: yc
     desc: Yandex Cloud CLI
     exec: yc

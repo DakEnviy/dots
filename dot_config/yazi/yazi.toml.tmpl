@@ -1,0 +1,20 @@
+{{ if .configure.yazi -}}
+[mgr]
+linemode    = "size"
+show_hidden = true
+
+{{ if and .configure.git .binaries.git -}}
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*/"
+run = "git"
+
+{{ end -}}
+
+{{ end -}}
+

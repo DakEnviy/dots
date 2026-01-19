@@ -1,0 +1,33 @@
+{{ if .configure.yazi -}}
+[[input.prepend_keymap]]
+on   = "<Esc>"
+run  = "close"
+desc = "Cancel input"
+
+[[mgr.prepend_keymap]]
+on   = "l"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+[[mgr.prepend_keymap]]
+on   = [ "c", "m" ]
+run  = "plugin chmod"
+desc = "Chmod on selected files"
+
+{{ if and .configure.git .binaries.git -}}
+[[mgr.prepend_keymap]]
+on = [ "g", "r" ]
+run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"'
+
+{{ end -}}
+
+{{ if eq .chezmoi.os "darwin" -}}
+# MacOS Quick Look
+[[mgr.prepend_keymap]]
+on = "<C-o>"
+run = "shell -- qlmanage -p '%s'"
+
+{{ end -}}
+
+{{ end -}}
+

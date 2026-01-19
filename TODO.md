@@ -42,7 +42,8 @@
 - [x] Configure ghostty
 - [x] Implement cask installation
 - [x] Add setting window title for fish and vim
-- [ ] Configure yazi
+- [x] Configure yazi
+- [ ] Check zoxide
 - [ ] Support fonts
 - [ ] Add vscode config
 - [ ] Update starship config and double-check arc there

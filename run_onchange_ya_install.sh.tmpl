@@ -1,0 +1,27 @@
+{{ if and .configure.yazi .binaries.yazi -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+rm -rf "$HOME/.config/yazi/plugins"
+
+cat <<EOF > "$HOME/.config/yazi/package.toml"
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+
+{{ if and .configure.git .binaries.git -}}
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+
+{{ end -}}
+EOF
+
+ya pkg install
+
+{{ end -}}
+

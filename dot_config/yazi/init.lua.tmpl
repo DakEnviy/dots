@@ -1,0 +1,45 @@
+{{ if .configure.yazi -}}
+require("full-border"):setup()
+
+Status:children_add(function()
+    local h = cx.active.current.hovered
+    if not h or ya.target_family() ~= "unix" then
+        return ""
+    end
+
+    local time = math.floor(h.cha.mtime or 0)
+    if time == 0 then
+        time = ""
+    elseif os.date("%Y", time) == os.date("%Y") then
+        time = os.date("%b %d %H:%M", time)
+    else
+        time = os.date("%b %d %Y", time)
+    end
+
+    return ui.Line {
+        " ",
+        ui.Span(ya.user_name(h.cha.uid) or tostring(h.cha.uid)):fg("yellow"),
+        ":",
+        ui.Span(ya.group_name(h.cha.gid) or tostring(h.cha.gid)):fg("yellow"),
+        " ",
+        ui.Span(time):fg("blue"),
+    }
+end, 1500, Status.RIGHT)
+
+{{ if and .configure.git .binaries.git -}}
+th.git = th.git or {}
+th.git.ignored_sign = ""
+th.git.untracked_sign = "?"
+th.git.modified_sign = ""
+th.git.added_sign = ""
+th.git.deleted_sign = ""
+th.git.updated_sign = ""
+
+require("git"):setup {
+    order = 500
+}
+
+{{ end -}}
+
+{{ end -}}
+
