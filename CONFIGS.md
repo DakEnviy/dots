@@ -10,7 +10,6 @@ This document provides detailed information about each configuration file manage
 - [Git](#git)
 - [Vim](#vim)
 - [Tmux](#tmux)
-- [Ranger](#ranger)
 - [Yazi](#yazi)
 - [Python/pip](#pythonpip)
 
@@ -42,7 +41,6 @@ This document provides detailed information about each configuration file manage
 - **kubectl**: `k` alias
 - **podman**: `docker` alias
 - **python3** (macOS): USER_BASE in PATH
-- **ranger**: Changes to last visited directory on exit
 - **ripgrep+delta**: `rgd` function (search with delta output)
 - **rust**: `CARGOPATH=~/.cargo`, bin in PATH
 - **starship**: Auto-init in interactive sessions
@@ -125,14 +123,6 @@ See [`dot_vimrc.tmpl`](dot_vimrc.tmpl) for full configuration.
 - Custom status bar: uptime, time, user@host (top position, dual-line)
 
 See [`dot_tmux.conf.tmpl`](dot_tmux.conf.tmpl) for full configuration.
-
-## Ranger
-
-### Configuration
-- Devicons plugin (file icons, auto-installed)
-- Image preview via Kitty (if installed)
-
-See [`dot_config/ranger/rc.conf.tmpl`](dot_config/ranger/rc.conf.tmpl) for full configuration.
 
 ## Yazi
 

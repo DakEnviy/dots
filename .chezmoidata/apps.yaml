@@ -171,13 +171,6 @@ apps:
     desc: The Python programming language
     exec: python3
     conf: true
-  - name: ranger
-    desc: A VIM-inspired filemanager for the console
-    exec: ranger
-    conf: true
-    install:
-      apt: ranger
-      brew: ranger
   - name: ripgrep
     desc: A line-oriented search tool that recursively searches the current directory for a regex pattern
     exec: rg
