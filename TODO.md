@@ -46,12 +46,12 @@
 - [ ] Check zoxide
 - [ ] Support fonts
 - [ ] Add vscode config
+- [ ] Try to make nvm and npm.fish optional
 - [ ] Update starship config and double-check arc there
 - [ ] Add light theme variant
 - [ ] Add ssh-agent
 - [ ] Add jumoreski
 - [ ] Add pnpm
-- [ ] Try to make nvm and npm.fish optional
 - [ ] Highlight TODO in vim
 
 **Apps**
