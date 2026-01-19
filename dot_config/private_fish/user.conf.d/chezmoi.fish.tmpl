@@ -4,15 +4,17 @@ alias ch 'chezmoi'
 if status is-interactive
     set -l branch ({{ .binaries.chezmoi }} git -- symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
     if test -z "$branch"
-        set branch "main"
+        set branch 'main'
     end
 
     set -l behind ({{ .binaries.chezmoi }} git -- rev-list --count "HEAD..origin/$branch" 2>/dev/null)
     if test -n "$behind" -a "$behind" -gt 0
+        echo -e ""
         echo -e "\033[35m╭─ ◆ Dotfiles Update Available\033[0m"
         echo -e "\033[35m│\033[0m"
         echo -e "\033[35m│\033[0m New changes are available in your dotfiles repository"
         echo -e "\033[35m│\033[0m Run \033[92m'chezmoi update'\033[0m to get updates"
+        echo -e ""
     end
 
     {{ .binaries.chezmoi }} git -- fetch --quiet &>/dev/null &
