@@ -14,7 +14,7 @@ on   = [ "c", "m" ]
 run  = "plugin chmod"
 desc = "Chmod on selected files"
 
-{{ if and .configure.git .binaries.git -}}
+{{ if and .configure.git .binaries.git .binaries.ya -}}
 [[mgr.prepend_keymap]]
 on = [ "g", "r" ]
 run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"'

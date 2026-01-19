@@ -4,7 +4,7 @@ set -euo pipefail
 
 # hash: {{ includeTemplate "dot_tmux.conf.tmpl" . | sha256sum }}
 
-tmux new-session -d ~/.tmux/plugins/tpm/bindings/install_plugins
+{{ .binaries.tmux }} new-session -d "$HOME/.tmux/plugins/tpm/bindings/install_plugins"
 
 {{ end -}}
 

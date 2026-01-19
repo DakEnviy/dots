@@ -4,7 +4,7 @@ set -euo pipefail
 
 # hash: {{ includeTemplate "dot_config/private_fish/fish_plugins.tmpl" . | sha256sum }}
 
-fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher update'
+{{ .binaries.fish }} -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher update'
 
 {{ end -}}
 

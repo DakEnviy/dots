@@ -1,4 +1,4 @@
-{{ if and .configure.fish .configure.chezmoi .binaries.chezmoi -}}
+{{ if and .configure.fish .configure.chezmoi .binaries.chezmoi .binaries.git -}}
 alias ch 'chezmoi'
 
 if status is-interactive

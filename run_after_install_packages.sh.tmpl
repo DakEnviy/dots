@@ -8,13 +8,13 @@
 set -euo pipefail
 
 {{ if get .packages "apt" -}}
-sudo apt update
-sudo apt install --yes {{ values .packages.apt | join " " }}
+sudo {{ .binaries.apt }} update
+sudo {{ .binaries.apt }} install --yes {{ values .packages.apt | join " " }}
 
 {{ end -}}
 
 {{ if get .packages "brew" -}}
-brew bundle --file=/dev/stdin <<EOF
+{{ .binaries.brew }} bundle --file=/dev/stdin <<EOF
 {{ range .packages.brew -}}
 {{ if or (gt (len (splitList "\n" .)) 1) (regexMatch "^(brew|cask)" .) -}}
 {{ . }}

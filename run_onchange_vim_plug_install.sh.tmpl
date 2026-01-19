@@ -4,7 +4,7 @@ set -euo pipefail
 
 # hash: {{ includeTemplate "dot_vimrc.tmpl" . | sha256sum }}
 
-vim +PlugInstall +qall
+{{ .binaries.vim }} +PlugInstall +qall
 
 {{ end -}}
 
