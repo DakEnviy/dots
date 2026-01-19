@@ -1,4 +1,4 @@
-{{ if and .configure.yazi .binaries.yazi -}}
+{{ if and .configure.yazi .binaries.ya -}}
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -21,7 +21,7 @@ use = "yazi-rs/plugins:git"
 {{ end -}}
 EOF
 
-ya pkg install
+{{ .binaries.ya }} pkg install
 
 {{ end -}}
 
