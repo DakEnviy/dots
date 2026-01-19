@@ -14,6 +14,12 @@ set -g theme_display_time yes
 set -g theme_display_group no
 set -g theme_display_rw no
 
+# Title settings
+function fish_title
+    set -q argv[1]; or set argv fish
+    echo (fish_prompt_pwd_dir_length=1 prompt_pwd): (string split ' ' "$argv")[1];
+end
+
 {{ if and .configure.fzf .binaries.fzf -}}
 # fifc settings
 set fifc_fd_opts --hidden --exclude=.git
