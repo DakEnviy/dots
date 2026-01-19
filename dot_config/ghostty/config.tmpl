@@ -18,7 +18,10 @@ window-height = 36
 
 mouse-hide-while-typing = true
 
+{{ if eq .chezmoi.os "darwin" -}}
 macos-titlebar-style = tabs
+
+{{ end -}}
 
 {{ end -}}
 
