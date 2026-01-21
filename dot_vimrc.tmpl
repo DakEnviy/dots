@@ -9,6 +9,9 @@ Plug 'tribela/vim-transparent'
 Plug 'easymotion/vim-easymotion'
 Plug 'jasonccox/vim-wayland-clipboard'
 Plug 'junegunn/vim-easy-align'
+{{- if and .configure.yazi .binaries.yazi }}
+Plug 'chriszarate/yazi.vim'
+{{- end }}
 
 " Syntax
 Plug 'sheerun/vim-polyglot'
@@ -66,6 +69,13 @@ map <Leader>b <Plug>(easymotion-bl)
 " Easy Align configuration
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
+
+{{ if and .configure.yazi .binaries.yazi -}}
+" Yazi configuration
+nnoremap <silent> - :Yazi<cr>
+nnoremap <silent> _ :vsplit \| :Yazi<cr>
+
+{{ end -}}
 
 {{ end -}}
 
