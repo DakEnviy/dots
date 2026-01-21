@@ -14,6 +14,9 @@ use = "yazi-rs/plugins:smart-enter"
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+
 {{ if and .configure.git .binaries.git -}}
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"

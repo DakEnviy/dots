@@ -14,9 +14,13 @@ on   = [ "c", "m" ]
 run  = "plugin chmod"
 desc = "Chmod on selected files"
 
+[[mgr.prepend_keymap]]
+on  = "M"
+run = "plugin mount"
+
 {{ if and .configure.git .binaries.git .binaries.ya -}}
 [[mgr.prepend_keymap]]
-on = [ "g", "r" ]
+on  = [ "g", "r" ]
 run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"'
 
 {{ end -}}
@@ -24,7 +28,7 @@ run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"'
 {{ if eq .chezmoi.os "darwin" -}}
 # MacOS Quick Look
 [[mgr.prepend_keymap]]
-on = "<C-o>"
+on  = "<C-o>"
 run = "shell -- qlmanage -p '%s'"
 
 {{ end -}}
