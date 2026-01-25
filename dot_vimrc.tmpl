@@ -77,5 +77,14 @@ nnoremap <silent> _ :vsplit \| :Yazi<cr>
 
 {{ end -}}
 
+{{ if and .configure.rg .binaries.rg -}}
+" Ripgrep integration
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --case-sensitive\ --follow
+    set grepformat=%f:%l:%c:%m
+endif
+
+{{ end -}}
+
 {{ end -}}
 
