@@ -102,6 +102,7 @@ See [`dot_gitconfig.tmpl`](dot_gitconfig.tmpl) for full configuration.
 ### Plugins (vim-plug)
 - **Theme**: OneDark, transparent background
 - **Navigation**: EasyMotion (2-char search, line jumps, word navigation)
+- **Files**: yazi.vim (`-`/`_` keybindings) — if yazi is installed
 - **Editing**: Easy Align (visual alignment), Wayland clipboard
 - **Syntax**: Polyglot (multi-language), chezmoi, Sage, KDL support
 
@@ -109,6 +110,7 @@ See [`dot_gitconfig.tmpl`](dot_gitconfig.tmpl) for full configuration.
 - Line numbers (relative in normal mode)
 - 4-space indent, smart tabs, auto-indent
 - Custom keybindings: `,<space>` (clear search), `,c`/`,b` (system clipboard)
+- **ripgrep**: `grepprg` set to rg with vimgrep format (if installed)
 
 See [`dot_vimrc.tmpl`](dot_vimrc.tmpl) for full configuration.
 
