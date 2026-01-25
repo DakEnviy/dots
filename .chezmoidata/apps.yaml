@@ -178,6 +178,13 @@ apps:
     install:
       brew: ripgrep
       cargo: ripgrep
+  - name: sd
+    desc: Intuitive find & replace CLI (sed alternative)
+    exec: sd
+    conf: false
+    install:
+      brew: sd
+      cargo: sd
   - name: starship
     desc: The minimal, blazing-fast, and infinitely customizable prompt for any shell
     exec: starship
