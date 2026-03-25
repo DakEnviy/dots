@@ -43,6 +43,7 @@
 - [x] Implement cask installation
 - [x] Add setting window title for fish and vim
 - [x] Configure yazi
+- [ ] Add docs about sd
 - [ ] Check zoxide
 - [ ] Support fonts
 - [ ] Add vscode config
