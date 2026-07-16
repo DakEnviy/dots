@@ -5,14 +5,16 @@ show_hidden = true
 
 {{ if and .configure.git .binaries.git -}}
 [[plugin.prepend_fetchers]]
-id  = "git"
-url = "*"
-run = "git"
+id    = "git"
+url   = "*"
+run   = "git"
+group = "git"
 
 [[plugin.prepend_fetchers]]
-id  = "git"
-url = "*/"
-run = "git"
+id    = "git"
+url   = "*/"
+run   = "git"
+group = "git"
 
 {{ end -}}
 
