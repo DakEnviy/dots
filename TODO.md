@@ -43,6 +43,9 @@
 - [x] Implement cask installation
 - [x] Add setting window title for fish and vim
 - [x] Configure yazi
+- [ ] Do not call bitwarden in templates before install it
+- [ ] Fix endless installing of ghostty in other terminals in macos
+- [ ] Do you need to install chezmoi locally before any actions?
 - [ ] Add docs about sd
 - [ ] Check zoxide
 - [ ] Support fonts
