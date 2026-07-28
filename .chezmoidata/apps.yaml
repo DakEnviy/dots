@@ -109,7 +109,7 @@ apps:
     install:
       apt: fish
       brew: fish
-      script!: sudo chsh -s $(which /bin/fish) "$USER"
+      script!: sudo chsh -s "$(which fish)" "$USER"
   - name: fzf
     desc: A command-line fuzzy finder
     exec: fzf
