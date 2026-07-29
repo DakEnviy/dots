@@ -2,17 +2,30 @@
 [mgr]
 syntect_theme = "~/.config/yazi/OneHalfLight.tmTheme"
 
-[tabs]
-sep_inner = { open = "", close = "" }
-sep_outer = { open = "", close = "" }
-
 [indicator]
 preview = {}
 padding = { open = "█", close = "█" }
 
+[tabs]
+active    = { fg = "black", bg = "blue", bold = true }
+inactive  = { fg = "white", bg = "reset" }
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
+[mode]
+normal_main = { fg = "black", bg = "blue", bold = true }
+normal_alt  = { fg = "blue", bg = "reset" }
+select_main = { fg = "black", bg = "cyan", bold = true }
+select_alt  = { fg = "cyan", bg = "reset" }
+unset_main  = { fg = "black", bg = "red", bold = true }
+unset_alt   = { fg = "red", bg = "reset" }
+
 [status]
-sep_left  = { open = "", close = "" }
-sep_right = { open = "", close = "" }
+sep_left        = { open = "", close = "" }
+sep_right       = { open = "", close = "" }
+progress_label  = { fg = "white", bg = "reset", bold = true }
+progress_normal = { fg = "black", bg = "green" }
+progress_error  = { fg = "black", bg = "red" }
 
 {{ end -}}
 
