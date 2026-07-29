@@ -1,0 +1,6 @@
+{{ if and .configure.fish .configure.vivid .binaries.vivid -}}
+# Generate LS_COLORS from the terminal's own ANSI theme, so ls, fd, eza
+# and everything else that reads LS_COLORS stays consistent with Ghostty
+set -gx LS_COLORS (vivid generate ansi)
+
+{{ end -}}

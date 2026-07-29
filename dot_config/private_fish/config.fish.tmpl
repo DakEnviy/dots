@@ -6,10 +6,7 @@ end
 
 # Theme settings
 set -g fish_prompt_pwd_dir_length 0
-set -g fish_color_command blue
-set -g fish_color_param dadada
-set -g fish_color_operator dadada --bold
-set -g fish_color_comment white
+set -g fish_color_operator brcyan --bold
 set -g theme_display_time yes
 set -g theme_display_group no
 set -g theme_display_rw no
@@ -21,9 +18,15 @@ function fish_title
 end
 
 {{ if and .configure.fzf .binaries.fzf -}}
+# fzf settings
+set -x FZF_DEFAULT_OPTS '--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*" --color=light'
+
 # fifc settings
 set fifc_fd_opts --hidden --exclude=.git
 set fifc_bat_opts --style=numbers --color=always
+{{- if and .configure.eza .binaries.eza }}
+set fifc_eza_opts -la --group-directories-first --icons --no-permissions --no-user --no-filesize --no-time --
+{{- end }}
 {{- if and .configure.vim .binaries.vim }}
 set fifc_editor vim
 {{- end }}
@@ -43,6 +46,7 @@ set fzf_diff_highlighter delta --paging=never --width=20
 {{ end -}}
 
 {{ if and .configure.eza .binaries.eza -}}
+# fish-eza settings
 set EZA_STANDARD_OPTIONS --group --group-directories-first --icons --hyperlink
 alias llt 'eza $EZA_STANDARD_OPTIONS --tree'
 

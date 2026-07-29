@@ -206,6 +206,13 @@ apps:
     install:
       apt: vim
       brew: vim
+  - name: vivid
+    desc: A generator for LS_COLORS with support for multiple color themes
+    exec: vivid
+    conf: true
+    install:
+      brew: vivid
+      cargo: vivid
   - name: ya
     desc: CLI tool for yazi
     exec: ya
