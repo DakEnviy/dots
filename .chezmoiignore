@@ -2,9 +2,12 @@
 /LICENSE
 /CONFIGS.md
 /images
-/TODO.md
 
 /bootstrap.sh
+
+/TODO.md
+
+/AGENTS.md
 
 *.swp
 
