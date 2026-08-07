@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-REPO='git@github.com:DakEnviy/dots.git'
+REPO='https://github.com/DakEnviy/dots.git'
 
 echo "Chezmoi repo: $REPO"
 echo 'Initialization in progress...'
