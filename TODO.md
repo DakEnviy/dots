@@ -45,7 +45,7 @@
 - [x] Configure yazi
 - [ ] Use external resource for OneHalfLight theme in yazi
 - [ ] Do not call bitwarden in templates before install it
-- [ ] Fix endless installing of ghostty in other terminals in macos
+- [x] Fix endless installing of ghostty in other terminals in macos
 - [ ] Do you need to install chezmoi locally before any actions?
 - [ ] Add docs about sd
 - [ ] Check zoxide

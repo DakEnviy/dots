@@ -8,11 +8,13 @@ This is the chezmoi source state for macOS and Ubuntu. Edit it, never rendered f
 - Fresh bootstrap is iterative: package installation may write `.reinit`, and `bootstrap.sh` repeats `chezmoi init --apply` until it is absent. Preserve this contract.
 - On an already configured machine, reconfigure with `chezmoi init`, complete new prompts, inspect `chezmoi diff`, then run `chezmoi apply`. Do not use `bootstrap.sh` or `.reinit` for this flow.
 - `.chezmoidata/apps.yaml` is the app registry. App configs live under `dot_config/`; Fish integrations live under `dot_config/private_fish/user.conf.d/`.
+- Use `$osid` (`<os>-<arch>` on macOS, `<os>-<release>-<arch>` on Linux) for platform-specific lookups.
 - `dot_*`, `private_*`, and `.tmpl` are behavioral attributes whose order matters. `.chezmoiexternal.yaml` is implicitly templated; its keys and `.chezmoiignore` use target paths.
 
 ## Change Rules
 
 - Give each app a unique lowercase `exec`, clear `name`/`desc`, accurate `conf`, and supported install methods. `conf: true` enables `.configure.<exec>`.
+- Use an app's optional scalar-valued `path` map only for directories it provides. Keys are `all`, an OS, or `$osid` (most specific wins); resolve relative values from `.chezmoi.homeDir` and keep shared paths such as `.local/bin` in the base search path.
 - Preserve install priority: platform manager, Cargo, script, external. `apt!`/`brew!` are pre-install dependencies; `script!` is post-install. Plain `brew` values are formulas; values starting with `brew`/`cask` or spanning lines are raw Brewfile entries.
 - Make every app config a `.tmpl` guarded by `{{ if .configure.<exec> -}}`. Cross-tool integrations check `.configure.<dependency>` when applicable and `.binaries.<dependency>`. Check an app's own binary only when its absence would break a runtime command.
 - Use `.binaries.<exec>` in lifecycle scripts, non-primary shells, and early initialization when `PATH` may be incomplete. Guard platform behavior with `.chezmoi.os`, `.chezmoi.osRelease`, or `.hostType`.
@@ -22,7 +24,7 @@ This is the chezmoi source state for macOS and Ubuntu. Edit it, never rendered f
 
 - Keep template outer guards at column zero. Inspect rendered whitespace before using `{{-`/`-}}`; follow nearby template-function and pipeline patterns. End every text source and every non-empty rendered branch with a newline.
 - Preserve each file's existing EOF layout: never add or remove a final blank line as incidental cleanup. In particular, do not replace an existing trailing blank line (`\n\n`) with only a final newline (`\n`); verify EOF whitespace after every edit.
-- Use two-space YAML without tabs. In `apps.yaml`, order fields `name`, `desc`, `exec`, `conf`, `install`, then installation methods by priority.
+- Use two-space YAML without tabs. In `apps.yaml`, order fields `name`, `desc`, `exec`, `conf`, `path`, `install`, then installation methods by priority.
 - Keep `bootstrap.sh` POSIX `sh` with `set -e`. Lifecycle scripts use Bash with `set -euo pipefail`; indent four spaces, quote expansions, keep heredoc delimiters unindented, and remain idempotent.
 - In Fish, keep one integration per file, indent four spaces, use scoped variables deliberately, and prefer functions when arguments or state are involved. Guard interactive setup and run `fish_indent` only on rendered files.
 - Preserve nearby native style in TOML, Lua, Vim, tmux, Git, and other configs. Keep TPM initialization last. Do not reformat vendored themes or imported assets.

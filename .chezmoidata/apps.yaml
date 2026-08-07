@@ -24,7 +24,7 @@ apps:
         target: .local/bin/bw
         config:
           type: archive-file
-          url: https://bitwarden.com/download/?app=cli&platform=$platform
+          url: https://bitwarden.com/download/?app=cli&platform=$os
           path: bw
           executable: true
           refreshPeriod: 168h
@@ -39,6 +39,8 @@ apps:
     desc: The Rust package manager
     exec: cargo
     conf: true
+    path:
+      all: .cargo/bin
     install:
       apt!: build-essential # This packages is needed for compiling rust packages
       script: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
@@ -121,6 +123,8 @@ apps:
     desc: A fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration
     exec: ghostty
     conf: true
+    path:
+      darwin: /Applications/Ghostty.app/Contents/MacOS
     install:
       brew: cask "ghostty"
   - name: git
@@ -141,6 +145,8 @@ apps:
     desc: The Go programming language
     exec: go
     conf: true
+    path:
+      all: .go/bin
   - name: gnupg
     desc: The GNU Privacy Guard
     exec: gpg
@@ -152,6 +158,9 @@ apps:
     desc: The missing package manager for macOS (or Linux)
     exec: brew
     conf: true
+    path:
+      darwin-amd64: /usr/local/bin
+      darwin-arm64: /opt/homebrew/bin
   - name: jq
     desc: Command-line JSON processor
     exec: jq

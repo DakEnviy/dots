@@ -18,20 +18,31 @@
 
 {{- $osid := .chezmoi.os -}}
 {{- if hasKey .chezmoi.osRelease "id" -}}
-{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{-   $osid = printf "%s-%s" $osid .chezmoi.osRelease.id -}}
 {{- end -}}
+{{- $osid = printf "%s-%s" $osid .chezmoi.arch -}}
 
 {{- $manager := get $packageManagers $osid -}}
 
-{{- $homePath := list
-      (joinPath .chezmoi.homeDir ".local/bin")
-      (joinPath .chezmoi.homeDir ".cargo/bin")
-      (joinPath .chezmoi.homeDir ".go/bin")
--}}
-{{- $path := concat (splitList ":" (env "PATH")) $homePath -}}
-{{- if eq .chezmoi.os "darwin" -}}
-{{-   $path = append $path "/opt/homebrew/bin" -}}
+{{- $path := append (splitList ":" (env "PATH")) (joinPath .chezmoi.homeDir ".local/bin") -}}
+{{- range $apps -}}
+{{-   if hasKey . "path" -}}
+{{-     $appPath := get .path "all" -}}
+{{-     with get .path $.chezmoi.os -}}
+{{-       $appPath = . -}}
+{{-     end -}}
+{{-     with get .path $osid -}}
+{{-       $appPath = . -}}
+{{-     end -}}
+{{-     if $appPath -}}
+{{-       if not (hasPrefix "/" $appPath) -}}
+{{-         $appPath = joinPath $.chezmoi.homeDir $appPath -}}
+{{-       end -}}
+{{-       $path = append $path $appPath -}}
+{{-     end -}}
+{{-   end -}}
 {{- end -}}
+{{- $path = uniq $path -}}
 
 {{- $binaries := dict -}}
 {{- range $apps -}}
