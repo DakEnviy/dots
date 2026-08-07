@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manage chezmoi"
+  short_description: "Safe chezmoi work grounded in official docs"
+  default_prompt: "Use $manage-chezmoi to complete this chezmoi task safely using the relevant official documentation."

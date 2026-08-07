@@ -1,45 +1,40 @@
 # Repository Guidelines
 
-## Architecture and Layout
+## Architecture
 
-This is the chezmoi source state for macOS and Ubuntu. Edit files here, never rendered files in `$HOME`.
+This is the chezmoi source state for macOS and Ubuntu. Edit it, never rendered files in `$HOME`.
 
-- On `chezmoi init` (or a command using `--init`), `.chezmoi.yaml.tmpl` generates the chezmoi config before the target state is computed. It explicitly loads `.chezmoidata/apps.yaml` and `.chezmoidata/package_managers.yaml` through `include | fromYaml`, then computes `.configure`, `.binaries`, and `.packages`.
-- Bootstrap is iterative: the first `chezmoi init --apply` can render `run_after_install_packages.sh.tmpl`, which installs missing packages and writes `.reinit`; `bootstrap.sh` repeats `chezmoi init --apply` while that marker exists so newly installed binaries are detected. Preserve this contract.
-- `.chezmoidata/apps.yaml` is the app registry. App configs live under `dot_config/`; Fish integrations are in `dot_config/private_fish/user.conf.d/`.
-- `dot_*`, `private_*`, and `.tmpl` are behavioral attributes; prefix order matters. `.chezmoiexternal.yaml` is implicitly templated, and its keys plus `.chezmoiignore` use target paths.
-- `run_after_*` runs after target updates. `run_onchange_*` reruns when its rendered content differs from the content of its last successful execution.
+- `.chezmoi.yaml.tmpl` loads `.chezmoidata/apps.yaml` and `.chezmoidata/package_managers.yaml`, then computes `.configure`, `.binaries`, and `.packages` before the target state is built.
+- Fresh bootstrap is iterative: package installation may write `.reinit`, and `bootstrap.sh` repeats `chezmoi init --apply` until it is absent. Preserve this contract.
+- On an already configured machine, reconfigure with `chezmoi init`, complete new prompts, inspect `chezmoi diff`, then run `chezmoi apply`. Do not use `bootstrap.sh` or `.reinit` for this flow.
+- `.chezmoidata/apps.yaml` is the app registry. App configs live under `dot_config/`; Fish integrations live under `dot_config/private_fish/user.conf.d/`.
+- `dot_*`, `private_*`, and `.tmpl` are behavioral attributes whose order matters. `.chezmoiexternal.yaml` is implicitly templated; its keys and `.chezmoiignore` use target paths.
 
 ## Change Rules
 
-- Register apps with a unique lowercase `exec`, clear `name`/`desc`, accurate `conf`, and supported install methods. `conf: true` enables `.configure.<exec>`.
-- Preserve install priority: platform manager, Cargo, script, external. `apt!`/`brew!` are pre-install dependencies; `script!` is post-install. Plain `brew` values are formulas; values beginning with `brew`/`cask` or spanning lines are raw Brewfile entries.
-- Every app config must be `.tmpl` and guarded by `{{ if .configure.<exec> -}}`. Cross-tool integrations check both `.configure.<dependency>` (when that dependency has `conf: true`) and `.binaries.<dependency>`. Check an app's own binary only when absence would break a runtime command, not merely to render its config.
-- When an executable might not yet be on `PATH`, use its `.binaries.<exec>` path in `run_*` scripts, non-primary shells, and early initialization. Guard platform behavior with `.chezmoi.os`, `.chezmoi.osRelease`, or `.hostType`.
-- In `.chezmoi.yaml.tmpl`, expose reusable values under `data`, use `prompt*Once`, use `unsafe` when empty values must prompt again, and clear app-specific values when disabled.
+- Give each app a unique lowercase `exec`, clear `name`/`desc`, accurate `conf`, and supported install methods. `conf: true` enables `.configure.<exec>`.
+- Preserve install priority: platform manager, Cargo, script, external. `apt!`/`brew!` are pre-install dependencies; `script!` is post-install. Plain `brew` values are formulas; values starting with `brew`/`cask` or spanning lines are raw Brewfile entries.
+- Make every app config a `.tmpl` guarded by `{{ if .configure.<exec> -}}`. Cross-tool integrations check `.configure.<dependency>` when applicable and `.binaries.<dependency>`. Check an app's own binary only when its absence would break a runtime command.
+- Use `.binaries.<exec>` in lifecycle scripts, non-primary shells, and early initialization when `PATH` may be incomplete. Guard platform behavior with `.chezmoi.os`, `.chezmoi.osRelease`, or `.hostType`.
+- In `.chezmoi.yaml.tmpl`, expose reusable values under `data`, use `prompt*Once`, use `unsafe` when an empty value must prompt again, and clear app-specific values when disabled.
 
-## Code Style
+## Style
 
-- **Templates:** Keep outer guards at column zero. Use `{{-`/`-}}` only after inspecting rendered whitespace. Follow nearby `get`, `dig`, `joinPath`, `quote`, and `toYaml | trim | nindent` patterns; align wrapped pipelines and conditions.
-- **End of file:** End every text source file, including `.tmpl` files, with a newline. When changing template guards or whitespace trimming, verify that every non-empty rendered file also ends with a newline.
-- **YAML:** Use two spaces and no tabs. In `apps.yaml`, order fields `name`, `desc`, `exec`, `conf`, `install`, then list install methods by priority.
-- **Shell:** `bootstrap.sh` stays POSIX `sh` with `set -e`; lifecycle scripts use `#!/usr/bin/env bash` and `set -euo pipefail`. Indent four spaces, quote expansions and paths, keep heredoc delimiters unindented, and make scripts idempotent.
-- **Fish:** Keep one integration per `<feature>.fish.tmpl` and indent four spaces. Use `set -l` for locals, `-g` for session globals, `-gx` for exports, and `-U` only for intentional universal state. Use snake_case variables and `__`-prefixed private helpers. Prefer aliases for literal shortcuts and functions for arguments or state. Guard interactive setup with `status is-interactive`; run `fish_indent` only after rendering.
-- **TOML/configs:** Group related settings with blank lines and preserve local quote style. Align `=` only in compact adjacent groups. Ghostty keys remain kebab-case `key = value`.
-- **Lua:** Use four spaces, snake_case locals, early returns, spaced operators, and trailing commas in multiline tables.
-- **Vim/tmux/Git:** Group behavior under short comments, use four-space nested indentation, and preserve native syntax. Keep TPM initialization at the bottom of `dot_tmux.conf.tmpl`.
-- **Imported assets:** Do not reformat `OneHalfLight.tmTheme` or other vendored themes; preserve upstream tabs, metadata, and structure.
+- Keep template outer guards at column zero. Inspect rendered whitespace before using `{{-`/`-}}`; follow nearby template-function and pipeline patterns. End every text source and every non-empty rendered branch with a newline.
+- Preserve each file's existing EOF layout: never add or remove a final blank line as incidental cleanup. In particular, do not replace an existing trailing blank line (`\n\n`) with only a final newline (`\n`); verify EOF whitespace after every edit.
+- Use two-space YAML without tabs. In `apps.yaml`, order fields `name`, `desc`, `exec`, `conf`, `install`, then installation methods by priority.
+- Keep `bootstrap.sh` POSIX `sh` with `set -e`. Lifecycle scripts use Bash with `set -euo pipefail`; indent four spaces, quote expansions, keep heredoc delimiters unindented, and remain idempotent.
+- In Fish, keep one integration per file, indent four spaces, use scoped variables deliberately, and prefer functions when arguments or state are involved. Guard interactive setup and run `fish_indent` only on rendered files.
+- Preserve nearby native style in TOML, Lua, Vim, tmux, Git, and other configs. Keep TPM initialization last. Do not reformat vendored themes or imported assets.
 
-## Chezmoi Safety Boundary
+## Safety
 
-- Normal add, edit, configure, fix, or test requests authorize source-repository changes only—not destination files, generated chezmoi config, packages, plugins, login shell, or other host state.
-- Never run `bootstrap.sh`, `chezmoi apply`, `chezmoi update`, `chezmoi init`, or equivalent host-mutating commands unless the user requests that exact action in the current turn.
-- Prefer non-destination-mutating checks: `git diff --check`, parsers, linters, targeted `chezmoi execute-template`/`cat`, `chezmoi status`, `chezmoi diff`, and `chezmoi apply --dry-run --verbose`. Render templates before language-specific linting.
-- First inspect templates for hooks, `output`, password-manager access, prompts, externals, or other side effects. Dry-run skips chezmoi scripts but not configured hooks.
-- Report checks run and the exact manual apply command. After an authorized apply, run `chezmoi verify`; a second dry run should show no unexpected work. Never infer host-mutation permission from earlier turns.
+- Normal change and test requests authorize source-repository edits only—not destination files, generated config, packages, plugins, login shells, or other host state.
+- Never run `bootstrap.sh`, `chezmoi init`, `chezmoi apply`, `chezmoi update`, or equivalent host-mutating commands unless the user requests that exact action in the current turn.
+- Before reading source state through chezmoi, inspect templates for hooks, `output`, password-manager access, prompts, externals, and other side effects. Dry-run skips chezmoi scripts, not configured hooks.
+- Prefer `git diff --check`, parsers, linters, targeted rendering, `chezmoi status`, `chezmoi diff`, and `chezmoi apply --dry-run --verbose`. Lint rendered output rather than mixed template source.
+- Report checks run and the exact manual apply sequence. After an authorized apply, run `chezmoi verify`; a second dry run should show no unexpected work.
 
-## Security and Review
+Never expose or include rendered configs, decrypted output, credentials, private keys, `BW_SESSION`, or host-specific state. Prefer pinned externals and checksums; justify mutable URLs and set `refreshPeriod`.
 
-Never commit rendered configs, Bitwarden output, credentials, private keys, `BW_SESSION`, or host-specific state. Prefer pinned external releases and checksums; justify mutable URLs and set `refreshPeriod`.
-
-Use Conventional Commits, e.g. `feat(yazi): add plugin` or `fix(fish): resolve binary path`. PRs should state behavior, affected platforms, prompt/package changes, validation, and screenshots for visual changes.
+Do not create commits unless explicitly requested; the user normally commits changes personally.
