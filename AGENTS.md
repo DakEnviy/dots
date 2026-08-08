@@ -22,7 +22,7 @@ This is the chezmoi source state for macOS and Ubuntu. Edit it, never rendered f
 
 ## Style
 
-- Keep template outer guards at column zero. Inspect rendered whitespace before using `{{-`/`-}}`; follow nearby template-function and pipeline patterns. End every text source and every non-empty rendered branch with a newline.
+- Keep template outer guards at column zero. Indent nested Go-template actions by two additional spaces inside the delimiters at each nesting level (for example, `{{-   if ... -}}`). Only outermost file-level guards remain unindented. Inspect rendered whitespace before using `{{-`/`-}}`; follow nearby template-function and pipeline patterns. End every text source and every non-empty rendered branch with a newline.
 - Preserve each file's existing EOF layout: never add or remove a final blank line as incidental cleanup. In particular, do not replace an existing trailing blank line (`\n\n`) with only a final newline (`\n`); verify EOF whitespace after every edit.
 - Use two-space YAML without tabs. In `apps.yaml`, order fields `name`, `desc`, `exec`, `conf`, `path`, `install`, then installation methods by priority.
 - Keep `bootstrap.sh` POSIX `sh` with `set -e`. Lifecycle scripts use Bash with `set -euo pipefail`; indent four spaces, quote expansions, keep heredoc delimiters unindented, and remain idempotent.

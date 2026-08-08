@@ -78,10 +78,12 @@
 {{-     $installList = append $installList (get $installDisplayNames $exec) -}}
 {{-   end -}}
 {{- end -}}
-{{- if deepEqual $install $prevInstall -}}
-{{-   $installList = promptMultichoiceOnce . "installList" "Which apps need to be installed" (values $installDisplayNames | sortAlpha) $installList -}}
-{{- else -}}
-{{-   $installList = promptMultichoice "Which apps need to be installed" (values $installDisplayNames | sortAlpha) $installList -}}
+{{- if $installDisplayNames -}}
+{{-   if deepEqual $install $prevInstall -}}
+{{-     $installList = promptMultichoiceOnce . "installList" "Which apps need to be installed" (values $installDisplayNames | sortAlpha) $installList -}}
+{{-   else -}}
+{{-     $installList = promptMultichoice "Which apps need to be installed" (values $installDisplayNames | sortAlpha) $installList -}}
+{{-   end -}}
 {{- end -}}
 {{- $install = dict -}}
 {{- range $apps -}}
@@ -135,10 +137,12 @@
 {{-     $configureList = append $configureList (get $configureDisplayNames $exec) -}}
 {{-   end -}}
 {{- end -}}
-{{- if deepEqual $configure $prevConfigure -}}
-{{-   $configureList = promptMultichoiceOnce . "configureList" "Which apps need to be configured" (values $configureDisplayNames | sortAlpha) $configureList -}}
-{{- else -}}
-{{-   $configureList = promptMultichoice "Which apps need to be configured" (values $configureDisplayNames | sortAlpha) $configureList -}}
+{{- if $configureDisplayNames -}}
+{{-   if deepEqual $configure $prevConfigure -}}
+{{-     $configureList = promptMultichoiceOnce . "configureList" "Which apps need to be configured" (values $configureDisplayNames | sortAlpha) $configureList -}}
+{{-   else -}}
+{{-     $configureList = promptMultichoice "Which apps need to be configured" (values $configureDisplayNames | sortAlpha) $configureList -}}
+{{-   end -}}
 {{- end -}}
 {{- $normalizedConfigureList := list -}}
 {{- range $configureList -}}
