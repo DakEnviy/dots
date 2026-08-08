@@ -169,7 +169,7 @@
 {{-   $gpgSearchTerm = promptStringOnce . "gpg.searchTerm" "What is the search term or ID for GPG key in Bitwarden" $gpgSearchTerm -}}
 {{-   if or (not $gpgMainKeyId) (ne $gpgSearchTerm $prevGpgSearchTerm) (promptBoolOnce . "gpg.refresh" "Do you need to refresh GPG key" false) -}}
 {{-     $gpgKey := (bitwarden "item" $gpgSearchTerm).notes -}}
-{{-     $gpgPackets := output "sh" "-c" (printf "printf -- %s | gpg --list-packets" ($gpgKey | quote)) -}}
+{{-     $gpgPackets := output "sh" "-c" "printf %s \"$1\" | \"$2\" --list-packets" "gpg-key-packets" $gpgKey $binaries.gpg -}}
 {{-     $gpgMainKeyId = $gpgPackets | regexFind "keyid: [0-9A-F]{16}" | substr 7 23 -}}
 {{-   end -}}
 {{- else -}}
