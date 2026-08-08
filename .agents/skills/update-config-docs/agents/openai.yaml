@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update Config Docs"
+  short_description: "Keep CONFIGS.md aligned with app configs"
+  default_prompt: "Use $update-config-docs to update CONFIGS.md for the current application configuration changes."

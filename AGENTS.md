@@ -28,7 +28,6 @@ This is the chezmoi source state for macOS and Ubuntu. Edit it, never rendered f
 - Keep `bootstrap.sh` POSIX `sh` with `set -e`. Lifecycle scripts use Bash with `set -euo pipefail`; indent four spaces, quote expansions, keep heredoc delimiters unindented, and remain idempotent.
 - In Fish, keep one integration per file, indent four spaces, use scoped variables deliberately, and prefer functions when arguments or state are involved. Guard interactive setup and run `fish_indent` only on rendered files.
 - Preserve nearby native style in TOML, Lua, Vim, tmux, Git, and other configs. Keep TPM initialization last. Do not reformat vendored themes or imported assets.
-- Documentation updates must be minimal and preserve the existing structure, tone, marketing copy, images, and level of detail. Change only statements proven stale or inaccurate; do not rewrite or expand a document into an exhaustive reference unless explicitly requested.
 
 ## Safety
 
