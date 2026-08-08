@@ -11,6 +11,7 @@ This document provides detailed information about each configuration file manage
 - [Vim](#vim)
 - [Tmux](#tmux)
 - [Yazi](#yazi)
+- [K9s](#k9s)
 - [Python/pip](#pythonpip)
 
 ## Fish Shell
@@ -40,6 +41,7 @@ This document provides detailed information about each configuration file manage
 - **chezmoi**: `ch` alias and update reminder
 - **go**: `GOPATH=~/.go`, bin in PATH
 - **gpg**: `GPG_TTY`, `bw-gpg-import`/`bw-gpg-choose` functions (Bitwarden integration)
+- **k9s**: `K9S_CONFIG_DIR=~/.config/k9s`
 - **kubectl**: `k` alias
 - **npm**: `ni`/`ns` install aliases with ad blocking, no audit and offline preference
 - **nvm**: LTS default, checks `.nvmrc` on startup and directory changes
@@ -147,6 +149,13 @@ See [`dot_tmux.conf.tmpl`](dot_tmux.conf.tmpl) for full configuration.
 - **Keymaps**: `l` (smart-enter), `cm` (chmod), `M` (mount), `Ctrl+o` (macOS Quick Look)
 
 See [`dot_config/yazi`](dot_config/yazi) for full configuration.
+
+## K9s
+
+### Configuration
+- **Theme**: Official One Light skin
+
+See [`dot_config/k9s`](dot_config/k9s) and [`dot_config/private_fish/user.conf.d/k9s.fish.tmpl`](dot_config/private_fish/user.conf.d/k9s.fish.tmpl) for the configuration.
 
 ## Python/pip
 

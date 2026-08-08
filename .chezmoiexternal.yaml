@@ -1,7 +1,10 @@
+{{- $normalizedOs := $.chezmoi.os | replace "darwin" "macos" -}}
+{{- $osTitle := $.chezmoi.os | title -}}
+
 {{ if get .packages "external" -}}
 {{- range .packages.external }}
 {{ .target | quote }}:
-  {{- .config | toYaml | trim | nindent 2 | replace "$os" ($.chezmoi.os | replace "darwin" "macos") | replace "$arch" $.chezmoi.arch }}
+  {{- .config | toYaml | trim | nindent 2 | replace "${os}" $normalizedOs | replace "${osTitle}" $osTitle | replace "${arch}" $.chezmoi.arch }}
 {{- end }}
 
 {{ end -}}
@@ -29,6 +32,14 @@
   url: https://github.com/tmux-plugins/tpm/archive/master.tar.gz
   stripComponents: 1
   exact: true
+  refreshPeriod: 168h
+
+{{ end -}}
+
+{{ if .configure.k9s -}}
+.config/k9s/skins/one-light.yaml:
+  type: file
+  url: https://raw.githubusercontent.com/derailed/k9s/master/skins/one-light.yaml
   refreshPeriod: 168h
 
 {{ end -}}

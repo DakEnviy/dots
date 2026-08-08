@@ -24,7 +24,7 @@ apps:
         target: .local/bin/bw
         config:
           type: archive-file
-          url: https://bitwarden.com/download/?app=cli&platform=$os
+          url: https://bitwarden.com/download/?app=cli&platform=${os}
           path: bw
           executable: true
           refreshPeriod: 168h
@@ -168,6 +168,20 @@ apps:
     install:
       apt: jq
       brew: jq
+  - name: k9s
+    desc: Kubernetes CLI to manage clusters in style
+    exec: k9s
+    conf: true
+    install:
+      brew: k9s
+      external:
+        target: .local/bin/k9s
+        config:
+          type: archive-file
+          url: https://github.com/derailed/k9s/releases/latest/download/k9s_${osTitle}_${arch}.tar.gz
+          path: k9s
+          executable: true
+          refreshPeriod: 168h
   - name: kubectl
     desc: Production-Grade Container Scheduling and Management
     exec: kubectl
@@ -247,7 +261,7 @@ apps:
         target: .local/bin/yq
         config:
           type: file
-          url: https://github.com/mikefarah/yq/releases/latest/download/yq_linux_$arch
+          url: https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${arch}
           executable: true
           refreshPeriod: 168h
 
