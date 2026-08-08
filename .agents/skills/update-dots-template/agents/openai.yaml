@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update Dots Template"
+  short_description: "Keep the reusable dotfiles template current"
+  default_prompt: "Use $update-dots-template to selectively sync reusable framework changes into the dotfiles template."
