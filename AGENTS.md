@@ -37,6 +37,6 @@ This is the chezmoi source state for macOS and Ubuntu. Edit it, never rendered f
 - Prefer `git diff --check`, parsers, linters, targeted rendering, `chezmoi status`, `chezmoi diff`, and `chezmoi apply --dry-run --verbose`. Lint rendered output rather than mixed template source.
 - Report checks run and the exact manual apply sequence. After an authorized apply, run `chezmoi verify`; a second dry run should show no unexpected work.
 
-Never expose or include rendered configs, decrypted output, credentials, private keys, `BW_SESSION`, or host-specific state. Prefer pinned externals and checksums; justify mutable URLs and set `refreshPeriod`.
+Never expose or include rendered configs, decrypted output, credentials, private keys, `BW_SESSION`, or host-specific state. Do not pin application or plugin versions, and do not require checksums for their mutable upstream URLs. Set `refreshPeriod` for mutable externals.
 
 Do not create commits unless explicitly requested; the user normally commits changes personally.
