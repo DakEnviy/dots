@@ -1,7 +1,7 @@
 {{ if get .packages "external" -}}
 {{- range .packages.external }}
 {{ .target | quote }}:
-  {{- .config | toYaml | trim | nindent 2 | replace "$os" ($.chezmoi.os | replace "darwin" "macos") }}
+  {{- .config | toYaml | trim | nindent 2 | replace "$os" ($.chezmoi.os | replace "darwin" "macos") | replace "$arch" $.chezmoi.arch }}
 {{- end }}
 
 {{ end -}}

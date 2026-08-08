@@ -2,6 +2,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Chezmoi owns all Yazi plugins.
 rm -rf "$HOME/.config/yazi/plugins"
 
 cat <<EOF > "$HOME/.config/yazi/package.toml"
