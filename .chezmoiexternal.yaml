@@ -44,3 +44,10 @@
 
 {{ end -}}
 
+{{ if .configure.yazi -}}
+.config/yazi/OneHalfLight.tmTheme:
+  type: file
+  url: https://raw.githubusercontent.com/sonph/onehalf/master/sublimetext/OneHalfLight.tmTheme
+  refreshPeriod: 168h
+
+{{ end -}}
