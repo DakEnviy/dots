@@ -1,13 +1,13 @@
-/README.md
-/LICENSE
-/CONFIGS.md
-/images
+README.md
+LICENSE
+CONFIGS.md
+images/
 
-/bootstrap.sh
+bootstrap.sh
 
-/TODO.md
+TODO.md
 
-/AGENTS.md
+AGENTS.md
 
 *.swp
 
