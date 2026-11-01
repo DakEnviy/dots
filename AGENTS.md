@@ -2,7 +2,7 @@
 
 ## Architecture
 
-This is the chezmoi source state for macOS and Ubuntu. Edit it, never rendered files in `$HOME`.
+This is the chezmoi source state for macOS, Ubuntu, and Debian. Edit it, never rendered files in `$HOME`.
 
 - `.chezmoi.yaml.tmpl` loads `.chezmoidata/apps.yaml` and `.chezmoidata/package_managers.yaml`, then computes `.configure`, `.binaries`, and `.packages` before the target state is built.
 - Fresh bootstrap is iterative: package installation may write `.reinit`, and `bootstrap.sh` repeats `chezmoi init --apply` until it is absent. Preserve this contract.

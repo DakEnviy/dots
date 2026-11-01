@@ -1,7 +1,7 @@
 # DakEnviy's Dotfiles
 
 ![Manager](https://img.shields.io/badge/manager-chezmoi-blue?style=for-the-badge&logo=linuxcontainers&logoColor=white)
-![Supported](https://img.shields.io/badge/supported-Ubuntu%20%7C%20Mac-violet?style=for-the-badge&logo=linux&logoColor=white)
+![Supported](https://img.shields.io/badge/supported-Debian%20%7C%20Ubuntu%20%7C%20Mac-violet?style=for-the-badge&logo=linux&logoColor=white)
 ![Shell](https://img.shields.io/badge/shell-fish-green?style=for-the-badge&logo=fishshell&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge)
 

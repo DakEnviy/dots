@@ -1,6 +1,8 @@
 packageManagers:
   darwin-amd64: brew
   darwin-arm64: brew
+  linux-debian-amd64: apt
+  linux-debian-arm64: apt
   linux-ubuntu-amd64: apt
   linux-ubuntu-arm64: apt
 
